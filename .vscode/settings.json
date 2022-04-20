@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "stdlib.h": "c",
+        "kernel.h": "c",
+        "thread.h": "c",
+        "global.h": "c",
+        "video.h": "c",
+        "pit.h": "c",
+        "keyboard.h": "c",
+        "vga.h": "c",
+        "serial.h": "c",
+        "mouse.h": "c",
+        "expr.h": "c",
+        "list.h": "c",
+        "tokenizer.h": "c"
+    }
+}

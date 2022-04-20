@@ -1,0 +1,1 @@
+qemu-system-i386 -usb -enable-kvm -cpu host -no-reboot -no-shutdown -m 2048M -vga std -cdrom 'NBOS.iso' -serial stdio -boot d -soundhw ac97 -rtc base=localtime

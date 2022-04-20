@@ -1,0 +1,13 @@
+create 16777216
+add test.gs build/disks/a/test.gs
+add mscur_caret.bmp build/disks/a/mscur_caret.bmp
+add mscur_default.bmp build/disks/a/mscur_default.bmp
+add mscur_grab.bmp build/disks/a/mscur_grab.bmp
+add mscur_hand.bmp build/disks/a/mscur_hand.bmp
+add mscur_wait.bmp build/disks/a/mscur_wait.bmp
+add tbar.bmp build/disks/a/tbar.bmp
+add wallpaper.bmp build/disks/a/wallpaper.bmp
+add icons32.bmp build/disks/a/icons32.bmp
+save ramdisk.img
+print
+exit

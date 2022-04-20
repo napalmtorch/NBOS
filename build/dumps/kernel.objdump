@@ -1,0 +1,26 @@
+
+bin/kernel.bin:     file format elf32-i386
+
+SYMBOL TABLE:
+00100000 l    d  .multiboot.text	00000000 .multiboot.text
+00101000 l    d  .text	00000000 .text
+00101028 l    d  .eh_frame	00000000 .eh_frame
+00102000 l    d  .bss	00000000 .bss
+00000000 l    d  .comment	00000000 .comment
+00000000 l    df *ABS*	00000000 src/asm/boot.asm
+00000001 l       *ABS*	00000000 MBOOT_PAGE_ALIGN
+00000002 l       *ABS*	00000000 MBOOT_MEM_INFO
+00000004 l       *ABS*	00000000 MBOOT_VID_INFO
+1badb002 l       *ABS*	00000000 MBOOT_HEADER_MAGIC
+00000007 l       *ABS*	00000000 MBOOT_HEADER_FLAGS
+e4524ff7 l       *ABS*	00000000 MBOOT_CHECKSUM
+00000000 l    df *ABS*	00000000 kernel.c
+00182000 g       .bss	00000000 _kernel_end
+00182000 g       .bss	00000000 _stack_top
+00100000 g       .multiboot.text	00000000 _mboot
+00101000 g       .text	00000000 _start
+00102000 g       .bss	00000000 _stack_bottom
+00000000 g       .multiboot.text	00000000 _kernel_start
+00101010 g     F .text	00000016 _kernel_entry
+
+
