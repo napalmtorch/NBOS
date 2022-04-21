@@ -92,7 +92,7 @@ bool threadmgr_load(thread_t* thread)
     THREADMGR.count++;
     thread->state = TSTATE_RUNNING;
 
-    debug_info("Loaded thread - ADDR: 0x%8x ID: %d NAME: '%s'", thread, thread->id, thread->name);
+    //debug_info("Loaded thread - ADDR: 0x%8x ID: %d NAME: '%s'", thread, thread->id, thread->name);
     _sti();
     return true;
 }
@@ -112,7 +112,7 @@ bool threadmgr_unload(thread_t* thread)
     THREADMGR.threads = list;
     THREADMGR.count--;
     thread_dispose(thread);
-    debug_info("Unloaded thread at 0x%8x", thread);
+    //debug_info("Unloaded thread at 0x%8x", thread);
     _sti();
     return true;
 }
@@ -144,6 +144,15 @@ int threadmgr_get_index(thread_t* thread)
         if (THREADMGR.threads[i] == thread) { return i; }
     }
     return -1;
+}
+
+bool threadmgr_exists(thread_t* thread)
+{
+    for (int i = 0; i < THREADMGR.count; i++)
+    {
+        if (THREADMGR.threads[i] == thread) { return true; }
+    }
+    return false;
 }
 
 uint32_t threadmgr_generate_id()
@@ -181,7 +190,7 @@ thread_t* thread_create_kernel()
     t->stack_size = (uint32_t)&_stack_top - (uint32_t)&_stack_bottom;
     t->state = TSTATE_RUNNING;
     
-    debug_ok("Created thread - ADDR: 0x%8x, ID: %d, STACK(0x%8x-0x%8x), ENTRY: 0x%8x, NAME: '%s'", t, t->id, t->stack, t->stack + t->stack_size, t->entry, t->name);
+    //debug_ok("Created thread - ADDR: 0x%8x, ID: %d, STACK(0x%8x-0x%8x), ENTRY: 0x%8x, NAME: '%s'", t, t->id, t->stack, t->stack + t->stack_size, t->entry, t->name);
     return t;
 }
 
@@ -213,7 +222,7 @@ thread_t* thread_create(char* name, uint32_t stack_size, thread_entry_t entry, i
     heapfe(t)->thread = t;
     heapfe(t->stack)->thread = t;
     heapfe(t->args)->thread = t;
-    debug_ok("Created thread - ADDR: 0x%8x, ID: %d, STACK(0x%8x-0x%8x), ENTRY: 0x%8x, NAME: '%s'", t, t->id, t->stack, t->stack + t->stack_size, t->entry, t->name);
+    //debug_ok("Created thread - ADDR: 0x%8x, ID: %d, STACK(0x%8x-0x%8x), ENTRY: 0x%8x, NAME: '%s'", t, t->id, t->stack, t->stack + t->stack_size, t->entry, t->name);
     return t;
 }
 
@@ -257,7 +266,7 @@ void thread_exit()
     register int eax asm("eax");
     uint32_t code = eax;
     THREAD->state = TSTATE_TERMINATED;
-    debug_info("Thread %d('%s') exited with code %d", THREAD->id, THREAD->name, code);
+    //debug_info("Thread %d('%s') exited with code %d", THREAD->id, THREAD->name, code);
     _sti();
     while (true) { yield(); }
 }

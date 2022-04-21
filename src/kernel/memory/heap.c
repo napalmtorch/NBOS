@@ -19,6 +19,44 @@ heap_t heap_init(uint32_t size, uint32_t count, uint32_t align, bool msg)
     return heap;
 }
 
+int heap_cleart(int argc, char** argv)
+{
+    lock();
+    heap_t* heap = argv[1];
+    if (heap == NULL) { return 1; }
+    int count = 0;
+    for (uint32_t i = 0; i < heap->max; i++)
+    {
+        if (heap->entries[i].ptr == NULL || heap->entries[i].size == 0 || heap->entries[i].type == MEMTYPE_RESERVED || heap->entries[i].thread == NULL) { continue; }
+        if (heap->entries[i].type != MEMTYPE_FREE) 
+        { 
+            if (!threadmgr_exists(heap->entries[i].thread)) { heap_free(heap, heap->entries[i].ptr); count++; }
+        }
+    }
+    heap_merge(heap);
+    //debug_info("Freed %d dead pointers", count);
+    unlock();
+    return 0;
+}
+
+void heap_clean(heap_t* heap)
+{
+    heap->time = pit_get_seconds();
+    if (heap->time != heap->timelast) { heap->timelast = heap->time; heap->timer++; }
+
+    if (heap->timer >= 3)
+    {          
+        lock();
+        heap->timer = 0;
+        char** newargs = tmalloc(1 * sizeof(char*), MEMTYPE_PTRARRAY);
+        newargs[0] = heap;
+
+        thread_t* t = thread_create("memclean", TSTACK_DEFAULT, heap_cleart, 1, newargs);
+        threadmgr_load(t);
+        unlock();
+    }
+}
+
 void* heap_allocate(heap_t* heap, uint32_t size, uint8_t type)
 {
     if (size == 0) { return NULL; }

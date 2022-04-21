@@ -1,5 +1,6 @@
 #pragma once
 #include <lib/stdint.h>
+#include <lib/stream.h>
 #include <kernel/hal/interrupts/idt.h>
 
 typedef enum
@@ -91,27 +92,42 @@ KEY_F11 = 0x57,
 KEY_F12,
 } KEY;
 
-typedef void (*keyboard_event_t)(void* sender, void* arg);
+typedef void (*kbd_event_t)(void* sender, void* arg);
 
 typedef struct
 {
-    bool left_shift  : 1;
-    bool right_shift : 1;
-    bool control     : 1;
-    bool alt         : 1;
-    bool caps_lock   : 1;
-    bool escape      : 1;
-    bool newline     : 1;
-    keyboard_event_t on_char;
-    keyboard_event_t on_enter;
-    keyboard_event_t on_backspace;
-} PACKED keyboard_handler_t;
+    char upper[60];
+    char lower[60];
+} PACKED kbd_layout_t;
+
+typedef struct
+{
+    bool             left_shift  : 1;
+    bool             right_shift : 1;
+    bool             control     : 1;
+    bool             alt         : 1;
+    bool             caps_lock   : 1;
+    bool             escape      : 1;
+    bool             newline     : 1;
+    void*            host;
+    stream_t         stream;
+    kbd_event_t on_char;
+    kbd_event_t on_enter;
+    kbd_event_t on_backspace;
+} PACKED kbd_handler_t;
+
+static const kbd_layout_t KB_LAYOUT_US = (kbd_layout_t)
+{
+    .upper = "??!@#$%^&*()_+??QWERTYUIOP{}??ASDFGHJKL:\"~?|ZXCVBNM<>???? \0",
+    .lower = "??1234567890-=??qwertyuiop[]??asdfghjkl;'`?\\zxcvbnm,./??? \0",
+};
 
 void kbd_init();
 void kbd_handle(uint8_t data);
 void kbd_update_keymap();
 void kbd_update_handler();
-void kbd_set_handler(keyboard_handler_t* handler);
+void kbd_set_handler(kbd_handler_t* handler);
+kbd_handler_t* kbd_get_handler();
 
 bool kbd_keydown(KEY key);
 bool kbd_keyup(KEY key);

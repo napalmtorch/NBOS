@@ -55,5 +55,6 @@ void image_char(image_t* img, int x, int y, char c, uint32_t fg, uint32_t bg, fo
 void image_string(image_t* img, int x, int y, char* str, uint32_t fg, uint32_t bg, font_t font);
 void image_copy_trans(image_t* img, int x, int y, int w, int h, uint32_t trans, uint32_t* data);
 void image_copy(image_t* img, int x, int y, int w, int h, uint32_t* data);
+void image_copyt(image_t* img, int x, int y, int w, int h, uint32_t* data);
 void image_copy_partial(image_t* img, int x, int y, int img_w, int sx, int sy, int sw, int sh, uint32_t trans, uint32_t* data);
 void image_copy_partialf(image_t* img, int x, int y, int img_w, int sx, int sy, int sw, int sh, uint32_t trans, uint32_t color, uint32_t* data);

@@ -207,6 +207,19 @@ void image_copy(image_t* img, int x, int y, int w, int h, uint32_t* data)
     }
 }
 
+void image_copyt(image_t* img, int x, int y, int w, int h, uint32_t* data)
+{
+    if (img == NULL) { return; }
+    for (int i = 0; i < w * h; i++)
+    {
+        int xx = x + (i % w), yy = y + (i / w);
+        uint32_t dest_col = video_getinfo().buffer.data[yy * KARGS.video_mode.width + xx];
+        dest_col = (0x7F << 24) | ((dest_col & 0x00FFFFFF) << 1);
+        uint32_t col = color_blend(dest_col, data[i]);
+        image_blit(img, xx, yy, col);
+    }
+}
+
 void image_copy_partial(image_t* img, int x, int y, int img_w, int sx, int sy, int sw, int sh, uint32_t trans, uint32_t* data)
 {
     if (img == NULL) { return; }

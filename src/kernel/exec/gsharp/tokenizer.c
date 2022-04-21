@@ -47,10 +47,21 @@ bool tokenizer_run(gs_tokenizer_t* tokenizer)
         char c = stream_next(&tokenizer->input);
         if (!tokenizer_handle(tokenizer, c)) { error = true; break; }
         if (stream_isdone(&tokenizer->input)) { break; }
+        yield();
     }
 
-    if (error) { debug_error("Tokenizer failed"); }
+    if (error) 
+    { 
+        free(tokenizer->toks);
+        free(tokenizer->word);
+        stream_dispose(&tokenizer->input);
+        tokenizer->toks = NULL;
+        tokenizer->word = NULL;
+        debug_error("Tokenizer failed"); 
+    }
     else { debug_ok("Tokenizer finished"); }
+
+    yield();
     return !error;
 }
 
@@ -124,6 +135,7 @@ bool tokenizer_handle_string(gs_tokenizer_t* tokenizer)
         char c = stream_next(&tokenizer->input);
         if (c == '\"' || c == 0) { break; }
         stradd(str, c);
+        yield();
     }
 
     char* val = tmalloc(strlen(str) + 1, MEMTYPE_STRING);
@@ -142,6 +154,7 @@ bool tokenizer_handle_char(gs_tokenizer_t* tokenizer)
         char c = stream_next(&tokenizer->input);
         if (c == '\'' || c == 0) { break; }
         stradd(str, c);
+        yield();
     }
 
     char* val = tmalloc(strlen(str) + 1, MEMTYPE_STRING);

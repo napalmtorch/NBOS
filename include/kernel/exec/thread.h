@@ -58,6 +58,7 @@ bool     threadmgr_locate(thread_t* thread);
 thread_t* threadmgr_get_byindex(int index);
 uint32_t threadmgr_generate_id();
 int      threadmgr_get_index(thread_t* thread);
+bool     threadmgr_exists(thread_t* thread);
 
 thread_t* thread_create_kernel();
 thread_t* thread_create(char* name, uint32_t stack_size, thread_entry_t entry, int argc, char** argv);

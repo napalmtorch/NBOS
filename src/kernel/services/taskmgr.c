@@ -23,6 +23,10 @@ taskmgr_t* taskmgr_create(int x, int y)
     gui_tabctrl_addtab(taskmgr->tabctrl, taskmgr->tab_startup);
     gui_container_add_widget(taskmgr, taskmgr->tabctrl);
 
+    taskmgr->tab_startup->base.scroll_x += 300;
+    taskmgr->tab_startup->base.scroll_y += 50;
+    gui_container_add_widget(taskmgr->tab_startup, gui_create_button(32, 32, 92, 22, "TestBtn", taskmgr->tab_startup));
+
     taskmgr->list_windows = gui_create_listbox(8, 8, taskmgr->tab_windows->base.base.bounds.width - 16, taskmgr->tab_windows->base.base.bounds.height - 16, taskmgr->tab_windows);
     gui_container_add_widget(taskmgr->tab_windows, taskmgr->list_windows);
 

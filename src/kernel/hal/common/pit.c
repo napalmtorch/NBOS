@@ -28,7 +28,7 @@ void pit_init(uint32_t freq)
     pit_ticks        = 0;
     pit_timer        = 0;
     pit_switch_timer = 0;
-    pit_switch_freq  = 30;
+    pit_switch_freq  = 100;
 
     _cli();
 

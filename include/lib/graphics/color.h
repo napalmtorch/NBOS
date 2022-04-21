@@ -224,6 +224,45 @@ static inline uint32_t RGBToCOL32(uint8_t r, uint8_t g, uint8_t b)
     return (uint32_t)((0xFF << 24) | (r << 16) | (g << 8) | b);
 }
 
+static inline uint32_t ARGBToCOL32(uint8_t a, uint8_t r, uint8_t g, uint8_t b)
+{
+    return (uint32_t)((a << 24) | (r << 16) | (g << 8) | b);
+}
+
+static inline rgb_t COL32ToARGB(uint32_t color)
+{
+    rgb_t rgb;
+    rgb.a = (color & 0xFF000000) >> 24;
+    rgb.r = (color & 0x00FF0000) >> 16;
+    rgb.g = (color & 0x0000FF00) >> 8;
+    rgb.b = (color & 0x000000FF);
+    return rgb;
+}
+
+static inline uint32_t COL4ToCOL32(uint8_t color)
+{
+    switch (color)
+    {
+        case COL4_BLACK:        { return COL32_BLACK; }
+        case COL4_DARKBLUE:     { return COL32_BLUE; }
+        case COL4_DARKGREEN:    { return COL32_GREEN; }
+        case COL4_DARKCYAN:     { return COL32_DARKCYAN; }
+        case COL4_DARKRED:      { return COL32_DARKRED; }
+        case COL4_DARKMAGENTA:  { return COL32_DARKMAGENTA; }
+        case COL4_DARKYELLOW:   { return COL32_DARKORANGE; }
+        case COL4_GRAY:         { return COL32_GRAY; }
+        case COL4_DARKGRAY:     { return COL32_DIMGRAY; }
+        case COL4_BLUE:         { return COL32_CORNFLOWERBLUE; }
+        case COL4_GREEN:        { return COL32_LIME; }
+        case COL4_CYAN:         { return COL32_CYAN; }
+        case COL4_RED:          { return COL32_TOMATO; }
+        case COL4_MAGENTA:      { return COL32_MAGENTA; }
+        case COL4_YELLOW:       { return COL32_YELLOW; }
+        case COL4_WHITE:        { return COL32_WHITE; }
+        default:                { return COL32_BLACK; }
+    }
+}
+
 static inline const char* COL4ToANSI(COL4 color, bool bg)
 {
     if (bg)
@@ -272,4 +311,18 @@ static inline const char* COL4ToANSI(COL4 color, bool bg)
             default:                { return ANSI_FG_BLACK; }
         }
     }
+}
+
+static inline uint32_t color_blend(uint32_t ca, uint32_t cb)
+{
+    rgb_t cca = COL32ToARGB(ca);
+    rgb_t ccb = COL32ToARGB(cb);
+    if (ccb.a == 0xFF || cca.a == 0) { return cb; }
+    if (ccb.a == 0) { return ca; }
+
+    uint8_t aa = 0xFF - ((0xFF - cca.a) * (0xFF - ccb.a) / 0xFF);
+    uint8_t rr = (cca.r * (0xFF - ccb.a) + ccb.r * ccb.a) / 0xFF;
+    uint8_t gg = (cca.g * (0xFF - ccb.a) + ccb.g * ccb.a) / 0xFF;
+    uint8_t bb = (cca.b * (0xFF - ccb.a) + ccb.b * ccb.a) / 0xFF;
+    return ARGBToCOL32(aa, rr, gg, bb);
 }

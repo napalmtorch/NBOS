@@ -22,6 +22,7 @@
 #include <lib/gui/button.h>
 #include <lib/gui/label.h>
 #include <lib/gui/listbox.h>
+#include <lib/gui/scrollbar_y.h>
 #include <lib/gui/window.h>
 #include <lib/gui/winmgr.h>
 #include <lib/gui/theme.h>

@@ -20,11 +20,13 @@ typedef struct
     uint32_t      count;
     uint32_t      max;
     uint32_t      alignment;
+    uint32_t      time, timelast, timer;
     bool          messages;
 } PACKED heap_t;
 
 heap_t heap_init(uint32_t size, uint32_t count, uint32_t align, bool msg);
 void heap_print(heap_t* heap);
+void heap_clean(heap_t* heap);
 
 void* heap_allocate(heap_t* heap, uint32_t size, uint8_t type);
 bool  heap_free(heap_t* heap, void* ptr);

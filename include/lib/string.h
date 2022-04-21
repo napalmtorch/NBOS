@@ -27,6 +27,7 @@ char** strsplit(char* str, char delim, int* count);
 bool strwhite(char* str);
 char* strupper(char* str);
 char* strlower(char* str);
+char* strback(char* str);
 
 bool str_isdec(char* str);
 bool str_ishex(char* str, bool prefix);

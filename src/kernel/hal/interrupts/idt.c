@@ -144,7 +144,7 @@ void irq_unregister(IRQ irq)
 
 void exception_handler(irq_regs_t* regs)
 {
-    kpanic("CPU EXCEPTION 0x%2x", regs->irq);
+    kpanicf("CPU EXCEPTION 0x%2x", regs->irq, regs->irq);
     debug_halt();
 }
 

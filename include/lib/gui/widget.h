@@ -18,6 +18,7 @@ typedef enum
     WIDGET_TABPAGE,
     WIDGET_TABCTRL,
     WIDGET_LISTBOX,
+    WIDGET_SCROLLBAR,
 } WIDGET;
 
 typedef enum
@@ -54,6 +55,7 @@ typedef struct gui_tabctrl_t gui_tabctrl_t;
 typedef struct gui_tabbutton_t gui_tabbutton_t;
 typedef struct gui_label_t gui_label_t;
 typedef struct gui_listbox_t gui_listbox_t;
+typedef struct gui_scrollbar_y_t gui_scrollbar_y_t;
 
 typedef void (*gui_event_t)(gui_widget_t* this);
 typedef void (*gui_strevent_t)(gui_widget_t* this, char* str);
@@ -112,10 +114,19 @@ struct gui_label_t
 
 struct gui_listbox_t
 {
-    gui_widget_t base;
-    char**       items;
-    uint32_t     item_count;
-    int          selected_index;
+    gui_widget_t       base;
+    char**             items;
+    uint32_t           item_count;
+    int                selected_index;
+    gui_scrollbar_y_t* scrollbar;
+};
+
+struct gui_scrollbar_y_t
+{
+    gui_widget_t  base;
+    gui_button_t* btn_up;
+    gui_button_t* btn_down;
+    gui_widget_t* widget;
 };
 
 struct gui_button_t

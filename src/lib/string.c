@@ -242,6 +242,13 @@ char* strlower(char* str)
     return str;
 }
 
+char* strback(char* str)
+{
+    if (str == NULL) { return NULL; }
+    str[strlen(str) - 1] = 0;
+    return str;
+}
+
 bool str_isdec(char* str)
 {
     if (str == NULL) { return false; }

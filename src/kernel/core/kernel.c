@@ -37,7 +37,7 @@ void kernel_boot()
 
     ps2_init();
 
-    gs_tokenizer_t toks = gs_tokenize_file("A:/test.gs");
+    //gs_tokenizer_t toks = gs_tokenize_file("A:/test.gs");
 
     pit_init(5000);
     THREADMGR.ready = true;
@@ -47,21 +47,22 @@ void kernel_main()
 {
     lock(); debug_ok("Entered kernel main"); unlock();
 
-    cmdhandler_execute("cls");
+    cmdhandler_execute("cls", NULL);
 
     while (true)
     {
         lock();
         thread_monitor(threadmgr_get_byindex(0));
-        unlock();
-        yield();
+        heap_clean(&HEAP_SMALL);
+        heap_clean(&HEAP_LARGE);
+        yieldf();
     }
 }
 
 int idle_main(int argc, char** argv)
 {
     lock(); debug_ok("Entered idle main"); unlock();
-    while (true) { thread_monitor(argv[0]); yield(); }
+    while (true) { lock(); thread_monitor(argv[0]); yieldf(); }
 }
 
 void kernel_parse_args()

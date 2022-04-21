@@ -12,6 +12,7 @@
         "mouse.h": "c",
         "expr.h": "c",
         "list.h": "c",
-        "tokenizer.h": "c"
+        "tokenizer.h": "c",
+        "command.h": "c"
     }
 }

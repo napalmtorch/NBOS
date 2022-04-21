@@ -84,7 +84,12 @@ void gui_render_container(gui_container_t* container)
     gui_render_widget(container);
     image_t vbuff = video_getinfo().buffer;
     if (container->base.parent != NULL) { vbuff = container->base.parent->buffer; }
-    image_copy(&vbuff, container->base.bounds.x, container->base.bounds.y, container->buffer.width, container->buffer.height, container->buffer.data);
+
+    int sx = 0, sy = 0;
+    gui_container_t* cont = container->base.parent;
+    while (cont != NULL) { sx += cont->scroll_x; sy += cont->scroll_y; cont = cont->base.parent; }
+
+    image_copy(&vbuff, container->base.bounds.x + sx, container->base.bounds.y + sy, container->buffer.width, container->buffer.height, container->buffer.data);
 }
 
 void gui_container_add_widget(gui_container_t* container, gui_widget_t* widget)

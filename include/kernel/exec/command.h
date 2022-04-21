@@ -2,6 +2,7 @@
 #include <lib/stdint.h>
 #include <lib/stdarg.h>
 #include <kernel/exec/thread.h>
+#include <kernel/services/terminal.h>
 
 typedef struct
 {
@@ -13,4 +14,8 @@ typedef struct
 
 void cmdhandler_init();
 void cmdhandler_register(command_t cmd);
-int  cmdhandler_execute(char* input);
+int  cmdhandler_execute(char* input, terminal_t* term);
+
+int cmd_clear(int argc, char** argv);
+int cmd_help(int argc, char** argv);
+int cmd_exec(int argc, char** argv);

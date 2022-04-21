@@ -38,7 +38,12 @@ void gui_update_widget(gui_widget_t* widget)
     rect_t bounds = widget->bounds;
 
     gui_container_t* cont = widget->parent;
-    while (cont != NULL) { bounds.x += cont->base.bounds.x; bounds.y += cont->base.bounds.y; cont = cont->base.parent; }
+    while (cont != NULL) { bounds.x += cont->base.bounds.x + cont->scroll_x; bounds.y += cont->base.bounds.y + cont->scroll_y; cont = cont->base.parent; }
+
+    if (widget->parent != NULL)
+    {
+        if (!widget->parent->base.flags.hover) { widget->flags.hover = false; widget->flags.clicked = false; widget->flags.down = false; widget->flags.unclicked = false; return; }
+    }
 
     if (rect_contains(bounds, mouse_getx(), mouse_gety()))
     {
