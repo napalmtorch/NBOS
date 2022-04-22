@@ -7,10 +7,10 @@ SYMBOL TABLE:
 00111000 l    d  .data	00000000 .data
 00112000 l    d  .rodata	00000000 .rodata
 00116c60 l    d  .rodata.str1.1	00000000 .rodata.str1.1
-001173cc l    d  .eh_frame	00000000 .eh_frame
-0011e768 l    d  .rodata.str1.4	00000000 .rodata.str1.4
-0011ee34 l    d  .rodata.cst4	00000000 .rodata.cst4
-0011f000 l    d  .bss	00000000 .bss
+00117418 l    d  .eh_frame	00000000 .eh_frame
+0011ef6c l    d  .rodata.str1.4	00000000 .rodata.str1.4
+0011f67c l    d  .rodata.cst4	00000000 .rodata.cst4
+00120000 l    d  .bss	00000000 .bss
 00000000 l    d  .comment	00000000 .comment
 00000000 l    df *ABS*	00000000 src/asm/boot.asm
 00000001 l       *ABS*	00000000 MBOOT_PAGE_ALIGN
@@ -23,30 +23,31 @@ e4524ffb l       *ABS*	00000000 MBOOT_CHECKSUM
 00000000 l    df *ABS*	00000000 button.c
 00000000 l    df *ABS*	00000000 command.c
 00000000 l    df *ABS*	00000000 container.c
+00101f70 l     F .text	000000d2 gui_container_remove_widget_at.part.0
 00000000 l    df *ABS*	00000000 ctype.c
 00000000 l    df *ABS*	00000000 debug.c
-00102160 l     F .text	00000032 debug_print.part.2
+00102550 l     F .text	00000032 debug_print.part.2
 00112000 l     O .rodata	0000003c CSWTCH.29
-00102240 l     F .text	00000042 debug_print_fg.part.3
+00102630 l     F .text	00000042 debug_print_fg.part.3
 00000000 l    df *ABS*	00000000 expr.c
 0011203c l     O .rodata	0000001e EXPR_PRECEDENCES
-00102e01 l     F .text	0000005d expr_getprec.part.1
+001031f1 l     F .text	0000005d expr_getprec.part.1
 00000000 l    df *ABS*	00000000 gdt.c
 00000000 l    df *ABS*	00000000 global.c
 00000000 l    df *ABS*	00000000 heap.c
-00103000 l     F .text	0000006a heap_delete.part.0
-00103070 l     F .text	0000004a heap_nearest.part.1
-001030c0 l     F .text	000000ad heap_merge.part.2
-00103170 l     F .text	000000d8 heap_free.part.3
+001033f0 l     F .text	0000006a heap_delete.part.0
+00103460 l     F .text	0000004a heap_nearest.part.1
+001034b0 l     F .text	000000b2 heap_merge.part.2
+00103570 l     F .text	000000d8 heap_free.part.3
 00112180 l     O .rodata	00000050 CSWTCH.18
 00000000 l    df *ABS*	00000000 idt.c
 00000000 l    df *ABS*	00000000 image.c
-00104160 l     F .text	00000055 image_rectf.part.2
+00104560 l     F .text	00000055 image_rectf.part.2
 00000000 l    df *ABS*	00000000 src/asm/irqs.asm
-00104fef l       .text	00000000 _gdt_flush_ret
-0010500d l       .text	00000000 _idt_flush_ret
-0010501c l       .text	00000000 exception_stub
-0010504a l       .text	00000000 irq_stub
+001053ef l       .text	00000000 _gdt_flush_ret
+0010540d l       .text	00000000 _idt_flush_ret
+0010541c l       .text	00000000 exception_stub
+0010544a l       .text	00000000 irq_stub
 00000000 l    df *ABS*	00000000 kernel.c
 00000000 l    df *ABS*	00000000 keyboard.c
 001121e0 l     O .rodata	00000078 KB_LAYOUT_US
@@ -61,13 +62,13 @@ e4524ffb l       *ABS*	00000000 MBOOT_CHECKSUM
 00113160 l     O .rodata	00000e00 FONT_SANS8x14_DATA
 00000000 l    df *ABS*	00000000 math.c
 00000000 l    df *ABS*	00000000 memmgr.c
-001066b0 l     F .text	000000ba mem_map.part.0
+00106ac0 l     F .text	000000ba mem_map.part.0
 00113f60 l     O .rodata	00000050 CSWTCH.31
 00000000 l    df *ABS*	00000000 mouse.c
 00000000 l    df *ABS*	00000000 pit.c
 00000000 l    df *ABS*	00000000 ps2.c
-001070b0 l     F .text	00000024 ps2_sendcmd_ext.part.1
-001070e0 l     F .text	00000021 ps2_cmdresp.part.2
+00107510 l     F .text	00000024 ps2_sendcmd_ext.part.1
+00107540 l     F .text	00000021 ps2_cmdresp.part.2
 00000000 l    df *ABS*	00000000 queue.c
 00000000 l    df *ABS*	00000000 ramfs.c
 00000000 l    df *ABS*	00000000 src/asm/realmode.asm
@@ -86,51 +87,51 @@ e4524ffb l       *ABS*	00000000 MBOOT_CHECKSUM
 00000016 l       *ABS*	00000000 regs16_t.ds
 00000018 l       *ABS*	00000000 regs16_t.ef
 0000001a l       *ABS*	00000000 regs16_t_size
-00107a79 l       .text	00000000 reloc
-00107ab4 l       .text	00000000 p_mode16
-00107ace l       .text	00000000 r_mode16
-00107ae8 l       .text	00000000 ib
-00107b0f l       .text	00000000 p_mode32
-00107b47 l       .text	00000000 resetpic
-00107b68 l       .text	00000000 stack32_ptr
-00107b6c l       .text	00000000 idt32_ptr
-00107b72 l       .text	00000000 gdt32_ptr
-00107b78 l       .text	00000000 idt16_ptr
-00107b7e l       .text	00000000 gdt16_base
-00107b7e l       .text	00000000 gdt16_base.null
-00107b86 l       .text	00000000 gdt16_base.code32
-00107b8e l       .text	00000000 gdt16_base.data32
-00107b96 l       .text	00000000 gdt16_base.code16
-00107b9e l       .text	00000000 gdt16_base.data16
-00107ba6 l       .text	00000000 gdt16_ptr
-00107bac l       .text	00000000 int32_end
+00107ed9 l       .text	00000000 reloc
+00107f14 l       .text	00000000 p_mode16
+00107f2e l       .text	00000000 r_mode16
+00107f48 l       .text	00000000 ib
+00107f6f l       .text	00000000 p_mode32
+00107fa7 l       .text	00000000 resetpic
+00107fc8 l       .text	00000000 stack32_ptr
+00107fcc l       .text	00000000 idt32_ptr
+00107fd2 l       .text	00000000 gdt32_ptr
+00107fd8 l       .text	00000000 idt16_ptr
+00107fde l       .text	00000000 gdt16_base
+00107fde l       .text	00000000 gdt16_base.null
+00107fe6 l       .text	00000000 gdt16_base.code32
+00107fee l       .text	00000000 gdt16_base.data32
+00107ff6 l       .text	00000000 gdt16_base.code16
+00107ffe l       .text	00000000 gdt16_base.data16
+00108006 l       .text	00000000 gdt16_ptr
+0010800c l       .text	00000000 int32_end
 00000000 l    df *ABS*	00000000 rtc.c
 00000000 l    df *ABS*	00000000 scrollbar_y.c
 00000000 l    df *ABS*	00000000 serial.c
 00113fc0 l     O .rodata	0000003c CSWTCH.25
 00000000 l    df *ABS*	00000000 stack.c
-00108570 l     F .text	0000006a stack_push.part.0
-001085e0 l     F .text	00000090 stack_remove_at.part.1
+00108ae0 l     F .text	0000006a stack_push.part.0
+00108b50 l     F .text	00000090 stack_remove_at.part.1
 00000000 l    df *ABS*	00000000 stdlib.c
-00108b10 l     F .text	0000002e free.part.0
+00109080 l     F .text	0000002e free.part.0
 00000000 l    df *ABS*	00000000 stream.c
 00000000 l    df *ABS*	00000000 string.c
 00000000 l    df *ABS*	00000000 tabctrl.c
 00000000 l    df *ABS*	00000000 tabpage.c
 00000000 l    df *ABS*	00000000 taskmgr.c
 00000000 l    df *ABS*	00000000 terminal.c
-0010ab60 l     F .text	00000036 term_clear.part.2
-0010aba0 l     F .text	00000041 term_putc.part.3
+0010b2f0 l     F .text	00000036 term_clear.part.3
+0010b330 l     F .text	0000006f term_scroll.part.4
+0010b3a0 l     F .text	00000041 term_putc.part.5
 00114060 l     O .rodata	00000008 FONT_SANS8x14
-0010abf0 l     F .text	000000c5 term_scroll.part.5
-0010afc0 l     F .text	00000042 term_print_fbg.part.6
+0010b7b0 l     F .text	00000042 term_print_fbg.part.7
 00114080 l     O .rodata	00000e00 FONT_SANS8x14_DATA
 00000000 l    df *ABS*	00000000 thread.c
-0010b8f0 l     F .text	00000077 threadmgr_load.part.1
-0010b970 l     F .text	00000043 threadmgr_locate.part.2
-0010b9c0 l     F .text	00000048 threadmgr_get_index.part.3
-0010ba10 l     F .text	00000024 thread_dispose.part.4
-0010ba40 l     F .text	00000054 thread_setname.part.8
+0010c140 l     F .text	00000077 threadmgr_load.part.1
+0010c1c0 l     F .text	00000043 threadmgr_locate.part.2
+0010c210 l     F .text	00000048 threadmgr_get_index.part.3
+0010c260 l     F .text	00000024 thread_dispose.part.4
+0010c290 l     F .text	00000054 thread_setname.part.8
 00000000 l    df *ABS*	00000000 time.c
 00000000 l    df *ABS*	00000000 tokenizer.c
 00114f20 l     O .rodata	0000002c TOK_KEYWORDS
@@ -139,673 +140,688 @@ e4524ffb l       *ABS*	00000000 MBOOT_CHECKSUM
 00000000 l    df *ABS*	00000000 src/asm/tswitch.asm
 00000000 l    df *ABS*	00000000 vbe.c
 00000000 l    df *ABS*	00000000 vfs.c
-0010d640 l     F .text	00000053 vfs_register.part.0
+0010dea0 l     F .text	00000053 vfs_register.part.1
+0010e1e0 l     F .text	000000a5 vfs_dir_exists.part.0
 00000000 l    df *ABS*	00000000 vga.c
-0010db70 l     F .text	00000056 vga_putc.part.0
-0010dbd0 l     F .text	0000004d vga_scroll.part.1
-0010dc20 l     F .text	00000068 vga_newline.part.2
-0010dc90 l     F .text	0000009e vga_clear.part.3
-0010e090 l     F .text	0000003b vga_print_fbg.part.5
+0010e620 l     F .text	00000056 vga_putc.part.0
+0010e680 l     F .text	0000004d vga_scroll.part.1
+0010e6d0 l     F .text	00000068 vga_newline.part.2
+0010e740 l     F .text	0000009e vga_clear.part.3
+0010eb40 l     F .text	0000003b vga_print_fbg.part.5
 00000000 l    df *ABS*	00000000 video.c
 00114fcc l     O .rodata	00000008 FONT_SANS8x14
 00114fe0 l     O .rodata	00000e00 FONT_SANS8x14_DATA
 00000000 l    df *ABS*	00000000 widget.c
-0010f140 l     F .text	0000005a gui_set_text.part.1
-0010f1c0 l     F .text	0000005a gui_set_tag.part.2
+0010fef0 l     F .text	0000005a gui_set_text.part.1
+0010ff70 l     F .text	0000005a gui_set_tag.part.2
 00115de0 l     O .rodata	00000069 THEME_DEFAULT
 00115e4c l     O .rodata	00000008 FONT_SANS8x14
 00115e60 l     O .rodata	00000e00 FONT_SANS8x14_DATA
 00000000 l    df *ABS*	00000000 window.c
-0010f670 l     F .text	00000156 gui_window_movement.part.0
+00110420 l     F .text	00000156 gui_window_movement.part.0
 00000000 l    df *ABS*	00000000 winmgr.c
-0010fba0 l     F .text	0000008f winmgr_load.part.0
-0010fc30 l     F .text	000001b4 winmgr_unload.part.1
-0010d350 g     F .text	000000e2 vbe_fetchmodes
-0010bb10 g     F .text	000000e2 threadmgr_unload
-00108150 g     F .text	00000017 serial_println
-00107bb0 g     F .text	00000058 rtc_init
-001096a0 g     F .text	00000043 strcpy
-00106bc0 g     F .text	00000016 mem_align
-00108550 g     F .text	00000013 serial_validate
-00108690 g     F .text	00000032 stack_clear
-00104bb0 g     F .text	00000166 image_copy
-0010b8d0 g     F .text	00000019 term_printf
-0010bcb0 g     F .text	00000059 yield
-00102390 g     F .text	00000033 debug_header
-00105590 g     F .text	0000018d kernel_boot
-0010bdb0 g     F .text	00000037 threadmgr_exists
-0010de10 g     F .text	00000002 vga_delete
-00108110 g     F .text	00000034 serial_print
-0010d440 g     F .text	00000006 vbe_getbuff
-0012e1e0 g     O .bss	00000004 _vbe_ctrlinfo
-00104ab0 g     F .text	000000a0 image_string
-00122160 g     O .bss	0000c000 _mem_entries
-0011f100 g     O .bss	00000006 gdtr
-001057c0 g     F .text	000001c8 kbd_update_handler
-0010c1c0 g     F .text	00000032 thread_monitor
-0012e2c0 g     O .bss	00000004 _drawtimelast
-00102490 g     F .text	00000014 panic_msg
-0011f220 g     O .bss	00000004 MULTIBOOT
-0012e2a8 g     O .bss	00000001 _vga_w
-0012e160 g     O .bss	00000004 _mem_size
-0010d890 g     F .text	00000092 vfs_convert_path
-001088d0 g     F .text	0000001b charstack_create
-0010bd20 g     F .text	00000017 thread_exit
-00106f60 g     F .text	0000000c pit_get_ticks
-00101720 g     F .text	000000c2 cmdhandler_execute_cmd
-001084b0 g     F .text	00000031 serial_println_fg
-001076b0 g     F .text	0000001b strqueue_create
-00109f80 g     F .text	00000005 gui_render_tabctrl
-0010c990 g     F .text	00000045 tokenizer_handle_operator
-00109820 g     F .text	0000019f strsplit
-0012e16c g     O .bss	00000004 _mouse_y
-0010e1a0 g     F .text	0000003f vga_println_fg
-0012e1cc g     O .bss	00000002 _serial_port
-00105251 g       .text	00000000 irq128
-0010a040 g     F .text	00000068 gui_create_tabctrl
-00107f10 g     F .text	0000009a gui_create_scrollbar_y
-00105760 g     F .text	00000029 kbd_init
-001037b0 g     F .text	00000054 heap_fetch
-00109270 g     F .text	00000029 stream_next
-001022a0 g     F .text	0000000f debug_print_fg
-001080e0 g     F .text	0000002c serial_printc
-0010d600 g     F .text	00000002 vbe_setfg
-001050a5 g       .text	00000000 isr4
-00108af0 g     F .text	00000012 strstack_pop
-00107140 g     F .text	00000026 ps2_wait_output
-0010e6f0 g     F .text	0000016a video_draw
-00109430 g     F .text	00000003 memmove
-0010517f g       .text	00000000 isr27
-00107170 g     F .text	00000034 ps2_sendcmd
-0012e1a8 g     O .bss	00000004 rtc_timer
-00105a30 g     F .text	000002c4 gui_draw_label
-0012e2c4 g     O .bss	00000004 _drawtime
-001050f7 g       .text	00000000 isr13
-0010b2b0 g     F .text	00000021 term_print_fbg
+00110950 l     F .text	0000008f winmgr_load.part.0
+001109e0 l     F .text	000001b4 winmgr_unload.part.1
+0010dbb0 g     F .text	000000e2 vbe_fetchmodes
+0010c360 g     F .text	000000e2 threadmgr_unload
+001086c0 g     F .text	00000017 serial_println
+00108010 g     F .text	00000058 rtc_init
+00109c10 g     F .text	00000043 strcpy
+00106fd0 g     F .text	00000016 mem_align
+00108ac0 g     F .text	00000013 serial_validate
+00108c00 g     F .text	00000032 stack_clear
+00104fb0 g     F .text	00000166 image_copy
+0010c120 g     F .text	00000019 term_printf
+0010c500 g     F .text	00000080 yield
+00102780 g     F .text	00000033 debug_header
+00105990 g     F .text	0000018d kernel_boot
+0010c650 g     F .text	00000037 threadmgr_exists
+0010e8c0 g     F .text	00000002 vga_delete
+00108680 g     F .text	00000034 serial_print
+0010dca0 g     F .text	00000006 vbe_getbuff
+0012f1e0 g     O .bss	00000004 _vbe_ctrlinfo
+00104eb0 g     F .text	000000a0 image_string
+00123160 g     O .bss	0000c000 _mem_entries
+00120100 g     O .bss	00000006 gdtr
+00105bc0 g     F .text	000001c8 kbd_update_handler
+0010ca30 g     F .text	00000032 thread_monitor
+0012f2c0 g     O .bss	00000004 _drawtimelast
+00102880 g     F .text	00000014 panic_msg
+00120220 g     O .bss	00000004 MULTIBOOT
+0012f2a8 g     O .bss	00000001 _vga_w
+0012f160 g     O .bss	00000004 _mem_size
+0010e0f0 g     F .text	00000092 vfs_convert_path
+00108e40 g     F .text	0000001b charstack_create
+0010c5a0 g     F .text	00000037 thread_exit
+001073c0 g     F .text	0000000c pit_get_ticks
+001019c0 g     F .text	000000c2 cmdhandler_execute_cmd
+00108a20 g     F .text	00000031 serial_println_fg
+00107b10 g     F .text	0000001b strqueue_create
+0010a4f0 g     F .text	00000005 gui_render_tabctrl
+0010d1f0 g     F .text	00000045 tokenizer_handle_operator
+00109d90 g     F .text	0000019f strsplit
+0012f16c g     O .bss	00000004 _mouse_y
+0010ec50 g     F .text	0000003f vga_println_fg
+0012f1d4 g     O .bss	00000002 _serial_port
+00105651 g       .text	00000000 irq128
+0010a5b0 g     F .text	00000068 gui_create_tabctrl
+00108480 g     F .text	0000009a gui_create_scrollbar_y
+00105b60 g     F .text	00000029 kbd_init
+00103bb0 g     F .text	00000054 heap_fetch
+001097e0 g     F .text	00000029 stream_next
+00102690 g     F .text	0000000f debug_print_fg
+00108650 g     F .text	0000002c serial_printc
+0010de60 g     F .text	00000002 vbe_setfg
+001054a5 g       .text	00000000 isr4
+00109060 g     F .text	00000012 strstack_pop
+001075a0 g     F .text	00000026 ps2_wait_output
+0010f210 g     F .text	0000016a video_draw
+001099a0 g     F .text	00000003 memmove
+0010557f g       .text	00000000 isr27
+001075d0 g     F .text	00000034 ps2_sendcmd
+0012f1b0 g     O .bss	00000004 rtc_timer
+00105e30 g     F .text	000002c4 gui_draw_label
+0012f2c4 g     O .bss	00000004 _drawtime
+0010f950 g     F .text	0000008f taskbar_winbtns_update_active
+001054f7 g       .text	00000000 isr13
+0010bae0 g     F .text	00000021 term_print_fbg
 00113fb0 g     O .rodata	00000008 RTC_MILLIS_TIME
 00114004 g     O .rodata	00000011 HEX_VALUES
-00102580 g     F .text	00000002 debug_hexdump
-00107f00 g     F .text	00000005 gui_render_scrollbar_y
-00108e20 g     F .text	00000041 reverse
-00107550 g     F .text	00000041 ps2_callback_kbd
-0010d4b0 g     F .text	00000002 vbe_blit
-00104d20 g     F .text	000001ab image_copyt
-0010ad60 g     F .text	00000095 term_delete
-00102dfc g     F .text	00000005 expr_stack_pop
-001100f0 g     F .text	00000006 winmgr_get_count
-0012e2c8 g     O .bss	00000004 _vidframes
+00102970 g     F .text	00000002 debug_hexdump
+00108470 g     F .text	00000005 gui_render_scrollbar_y
+00109390 g     F .text	00000041 reverse
+001079b0 g     F .text	00000041 ps2_callback_kbd
+0010b560 g     F .text	000000b8 term_getfullpath
+0010dd10 g     F .text	00000002 vbe_blit
+00105120 g     F .text	000001ab image_copyt
+0010b490 g     F .text	00000095 term_delete
+001031ec g     F .text	00000005 expr_stack_pop
+00110eb0 g     F .text	00000006 winmgr_get_count
+0012f2c8 g     O .bss	00000004 _vidframes
 00114020 g     O .rodata	00000021 PUNCT_CHARS
-00108c50 g     F .text	000000a4 atol
-0010de20 g     F .text	00000012 vga_scroll
-00109a80 g     F .text	00000050 strlower
-00104630 g     F .text	00000044 image_rectf
-001100e0 g     F .text	00000006 winmgr_get_list
-00103550 g     F .text	00000079 heap_create_allocated
-00105229 g       .text	00000000 irq12
-0010d530 g     F .text	00000002 vbe_print_fbg
-00102430 g     F .text	0000002f debug_warning
-00102080 g     F .text	00000006 debug_getterm
-0010d500 g     F .text	00000002 vbe_printc_fbg
-0010514d g       .text	00000000 isr22
-0012e1ac g     O .bss	00000004 rtc_ticks
-0010d5c0 g     F .text	00000002 vbe_setcur_x
+001091c0 g     F .text	000000a4 atol
+0010e8d0 g     F .text	00000012 vga_scroll
+00109ff0 g     F .text	00000050 strlower
+00104a30 g     F .text	00000044 image_rectf
+00110e90 g     F .text	00000006 winmgr_get_list
+00103950 g     F .text	00000079 heap_create_allocated
+00105629 g       .text	00000000 irq12
+0010dd90 g     F .text	00000002 vbe_print_fbg
+00102820 g     F .text	0000002f debug_warning
+00102470 g     F .text	00000006 debug_getterm
+0010dd60 g     F .text	00000002 vbe_printc_fbg
+0010554d g       .text	00000000 isr22
+0012f1b4 g     O .bss	00000004 rtc_ticks
+0010de20 g     F .text	00000002 vbe_setcur_x
 00114000 g     O .rodata	00000004 LTOA_DIGITS
-001064f0 g     F .text	00000042 ceil
-00105107 g       .text	00000000 isr15
-00105a00 g     F .text	00000010 kbd_keyup
-0010be00 g     F .text	0000000f lock
-0010d520 g     F .text	00000002 vbe_print_fg
-00108050 g     F .text	00000056 serial_getportstr
-0011f224 g     O .bss	00000004 THREAD_NEXT
-001076d0 g     F .text	00000069 strqueue_enqueue
-0010aa70 g     F .text	000000e2 term_render
-00101400 g     F .text	00000053 gui_create_button
-0010dec0 g     F .text	00000054 vga_putc
-00106540 g     F .text	000000e8 floor
+00106900 g     F .text	00000042 ceil
+00105507 g       .text	00000000 isr15
+00105e00 g     F .text	00000010 kbd_keyup
+0010c6a0 g     F .text	0000000f lock
+0010dd80 g     F .text	00000002 vbe_print_fg
+001085c0 g     F .text	00000056 serial_getportstr
+00120224 g     O .bss	00000004 THREAD_NEXT
+00107b30 g     F .text	00000069 strqueue_enqueue
+0010b210 g     F .text	000000db term_render
+00101410 g     F .text	00000053 gui_create_button
+0010e970 g     F .text	00000054 vga_putc
+00106950 g     F .text	000000e8 floor
 0011217a g     O .rodata	00000001 KERNEL_DS_ACCESS
-0010c720 g     F .text	00000064 tokenizer_handle_hex
-00105215 g       .text	00000000 irq10
-0010b570 g     F .text	00000033 term_println_fbg
-0010e070 g     F .text	0000001d vga_printc_fg
-0012e3e0 g     O .bss	00000004 _win_count
-00107c10 g     F .text	00000011 rtc_get_reg
-0010523d g       .text	00000000 irq14
-0010d570 g     F .text	00000002 vbe_vprintf
-001022b0 g     F .text	00000020 debug_println
-0010f5a0 g     F .text	000000c0 gui_window_btnmax_click
-0010f660 g     F .text	00000005 gui_window_btnmin_click
-0010c1a0 g     F .text	00000012 thread_dispose
-001038f0 g     F .text	00000002 idt_default_handler
-00120000 g     O .bss	00000400 idt_handlers
-00105dd0 g     F .text	00000077 list_add
-001059d0 g     F .text	0000000a kbd_set_handler
-00102d72 g     F .text	00000022 expr_isop
-001050d5 g       .text	00000000 isr9
-001041c0 g     F .text	0000006b image_create
-00105201 g       .text	00000000 irq8
-0010e6a0 g     F .text	00000008 vga_getcur_y
-00106d80 g     F .text	0000000b mouse_btn_left
-00109370 g     F .text	00000053 memcpy
-00105d10 g     F .text	0000006e gui_create_label
-001017f0 g     F .text	00000180 cmdhandler_execute
-00109ba0 g     F .text	000000d7 str_ishex
-00105157 g       .text	00000000 isr23
+0010cf80 g     F .text	00000064 tokenizer_handle_hex
+00105615 g       .text	00000000 irq10
+0010bdc0 g     F .text	00000033 term_println_fbg
+0010eb20 g     F .text	0000001d vga_printc_fg
+0012f3e8 g     O .bss	00000004 _win_count
+00108070 g     F .text	00000011 rtc_get_reg
+0010563d g       .text	00000000 irq14
+0010ddd0 g     F .text	00000002 vbe_vprintf
+001026a0 g     F .text	00000020 debug_println
+00110350 g     F .text	000000c0 gui_window_btnmax_click
+00110410 g     F .text	00000005 gui_window_btnmin_click
+0010ca10 g     F .text	00000012 thread_dispose
+00103cf0 g     F .text	00000002 idt_default_handler
+00121000 g     O .bss	00000400 idt_handlers
+001061d0 g     F .text	00000077 list_add
+00105dd0 g     F .text	0000000a kbd_set_handler
+00103162 g     F .text	00000022 expr_isop
+001054d5 g       .text	00000000 isr9
+001045c0 g     F .text	0000006b image_create
+00105601 g       .text	00000000 irq8
+0010f150 g     F .text	00000008 vga_getcur_y
+00107190 g     F .text	0000000b mouse_btn_left
+001098e0 g     F .text	00000053 memcpy
+00106110 g     F .text	0000006e gui_create_label
+00101a90 g     F .text	00000180 cmdhandler_execute
+0010a110 g     F .text	000000d7 str_ishex
+00105557 g       .text	00000000 isr23
 00111000 g     O .data	00000018 SERIAL_PORTNAMES
-00104130 g     F .text	00000021 irq_ack
-0010f7d0 g     F .text	00000119 gui_update_window
-0010fb20 g     F .text	00000072 winmgr_force_refresh
-00101a30 g     F .text	000000db gui_update_container
-0012e3e4 g     O .bss	00000004 _win_list
-00102d28 g     F .text	00000003 expr_isnoise
-0010c480 g     F .text	0000007e tokenizer_addtok
-00105193 g       .text	00000000 isr29
-00102f50 g     F .text	00000052 gdt_init_entries
-0011f108 g     O .bss	00000004 _gdtr
-0010ccf0 g     F .text	000000bd gs_tokenize
-00103300 g     F .text	00000085 heap_clean
-00108e00 g     F .text	00000015 swap
-00106af0 g     F .text	000000c6 mem_unmap
-00101f40 g     F .text	00000011 islower
-0011f228 g     O .bss	00000006 KARGS
-00102030 g     F .text	00000011 tolower
-001071f0 g     F .text	00000038 ps2_cmdresp
-0010baa0 g     F .text	00000046 tswitch
-00109170 g     F .text	00000003 system
+00104530 g     F .text	00000021 irq_ack
+00110580 g     F .text	00000119 gui_update_window
+001108d0 g     F .text	00000072 winmgr_force_refresh
+00101ce0 g     F .text	000000db gui_update_container
+0012f3ec g     O .bss	00000004 _win_list
+00103118 g     F .text	00000003 expr_isnoise
+0010ccf0 g     F .text	0000006a tokenizer_addtok
+00105593 g       .text	00000000 isr29
+00103340 g     F .text	00000052 gdt_init_entries
+00120108 g     O .bss	00000004 _gdtr
+0010d550 g     F .text	000000bd gs_tokenize
+00103700 g     F .text	00000085 heap_clean
+00109370 g     F .text	00000015 swap
+00106f00 g     F .text	000000c6 mem_unmap
+00102330 g     F .text	00000011 islower
+00120228 g     O .bss	00000006 KARGS
+00102420 g     F .text	00000011 tolower
+00107650 g     F .text	00000038 ps2_cmdresp
+0010c2f0 g     F .text	00000046 tswitch
+001096e0 g     F .text	00000003 system
 00111018 g     O .data	00000004 ITOA_STR
-0010f110 g     F .text	00000002 gui_event_ms_down
-0010c200 g     F .text	00000022 thread_setname
-00108d10 g     F .text	000000bb atox
-00108b40 g     F .text	00000047 malloc
-0010ce40 g     F .text	0000005b gs_is_keyword
-0011f200 g     O .bss	00000018 gdt
-0010fad0 g     F .text	00000042 winmgr_render
-00106fa0 g     F .text	00000101 ps2_callback_shared
-00109c80 g     F .text	00000094 gui_dispose_tabctrl
-00106da0 g     F .text	0000000e mouse_btn_middle
-001051a7 g       .text	00000000 isr31
-00106d70 g     F .text	00000006 mouse_gety
-0012e2ac g     O .bss	00000004 _vga_base
-0010a2c0 g     F .text	000002a5 taskmgr_create
-00104f50 g     F .text	00000090 image_copy_partialf
-001083d0 g     F .text	00000015 serial_printf
-00109b20 g     F .text	00000078 str_isdec
-00102150 g     F .text	0000000e debug_newline
-00105a10 g     F .text	00000005 gui_dispose_label
-00109180 g     F .text	0000002b stream_create
+0010fec0 g     F .text	00000002 gui_event_ms_down
+0010ca70 g     F .text	00000022 thread_setname
+00109280 g     F .text	000000bb atox
+001090b0 g     F .text	00000047 malloc
+0010d6a0 g     F .text	0000005b gs_is_keyword
+00120200 g     O .bss	00000018 gdt
+00110880 g     F .text	00000042 winmgr_render
+00107400 g     F .text	00000101 ps2_callback_shared
+0010a1f0 g     F .text	00000094 gui_dispose_tabctrl
+001071b0 g     F .text	0000000e mouse_btn_middle
+001055a7 g       .text	00000000 isr31
+00107180 g     F .text	00000006 mouse_gety
+0012f2ac g     O .bss	00000004 _vga_base
+0010a930 g     F .text	0000032f taskmgr_create
+00105350 g     F .text	00000090 image_copy_partialf
+00108940 g     F .text	00000015 serial_printf
+0010a090 g     F .text	00000078 str_isdec
+00102540 g     F .text	0000000e debug_newline
+00105e10 g     F .text	00000005 gui_dispose_label
+001096f0 g     F .text	0000002b stream_create
 00114f60 g     O .rodata	00000048 NULL_FILE
-0010eba0 g     F .text	000000d4 taskbar_update_time
-00108e70 g     F .text	00000119 itoa
-0011f008 g     O .bss	00000001 _debugmode
-00105143 g       .text	00000000 isr21
-00102070 g     F .text	0000000a debug_setterm
-00104040 g     F .text	00000047 irq_register
-00101f90 g     F .text	0000002e ispunct
-00107ea0 g     F .text	00000055 gui_draw_scrollbar_y
-0012e1b0 g     O .bss	00000008 rtc_millis
-0010fdf0 g     F .text	00000012 winmgr_load
-001072c0 g     F .text	000001f8 ps2_init
-0012e180 g     O .bss	00000004 pit_freq
-0010521f g       .text	00000000 irq11
-00102fb0 g     F .text	0000004a gdt_init
-0010cdb0 g     F .text	0000008e gs_tokenize_file
-0012e240 g     O .bss	00000040 _vfs_list
-00101fc0 g     F .text	0000001b isspace
-00103880 g     F .text	0000006a heap_print
-0010f0f0 g     F .text	00000012 gui_event_ms_click
-00105189 g       .text	00000000 isr28
-0010d2c0 g     F .text	00000039 vbe_init
-0010a840 g     F .text	000001dd taskmgr_update
-00106f10 g     F .text	00000048 pit_callback
-001097d0 g     F .text	00000049 stradd
-0010f580 g     F .text	0000001c gui_window_btnclose_click
-0010e170 g     F .text	00000025 vga_println
-00106970 g     F .text	0000017d mem_request
-0010bd90 g     F .text	00000011 threadmgr_get_index
-00106c20 g     F .text	0000000c mem_valid_index
-00107850 g     F .text	000001dd ramfs_read_file
-0010dd30 g     F .text	00000085 vga_init
-0010d070 g     F .text	00000249 vbe_setmode
-001050cd g       .text	00000000 isr8
-00108820 g     F .text	00000023 stack_remove_at
-001af048 g     O .bss	00000001 _vbe_enabled
-0010f120 g     F .text	00000002 gui_event_ms_enter
-001051e3 g       .text	00000000 irq5
-0012e184 g     O .bss	00000004 pit_precise_timer
-00102cc1 g     F .text	00000029 expr_typecast_id
-00102bcb g     F .text	00000038 expr_getprec
-001091f0 g     F .text	00000023 stream_seek
-0010cee0 g     F .text	00000059 gs_is_opstr
-001063f0 g     F .text	000000c4 listbox_add
-0011f000 g     O .bss	00000004 _cmd_count
-0010cc00 g     F .text	000000e7 tokenizer_run
-0010f370 g     F .text	00000200 gui_draw_window
-0010e100 g     F .text	0000002f vga_print_fg
-00108670 g     F .text	0000001b stack_create
-00109240 g     F .text	00000022 stream_peekat
-001059e0 g     F .text	00000006 kbd_get_handler
-00108a90 g     F .text	00000032 strstack_clear
-00102000 g     F .text	00000026 isxdigit
-00107740 g     F .text	000000b4 strqueue_dequeue
-00105139 g       .text	00000000 isr20
-00107500 g     F .text	00000041 ps2_callback_ms
-0010e530 g     F .text	00000017 vga_disablecur
-0012e170 g     O .bss	00000004 _mouse_cycle
-0012e3e8 g     O .bss	00000004 _win_active
-0010eb80 g     F .text	0000001f taskbar_draw
-0010f570 g     F .text	00000005 gui_render_window
-00102300 g     F .text	0000006c debug_vprintf
-0010af30 g     F .text	00000023 term_printc
-001af04a g       .bss	00000000 _kernel_end
-0010fa40 g     F .text	00000028 gui_window_movement
-00103250 g     F .text	000000a4 heap_cleart
-0011f230 g     O .bss	00000004 THREAD
-0011f234 g     O .bss	00000011 THREADMGR
-00106db0 g     F .text	00000098 pit_init
-001050ff g       .text	00000000 isr14
-0010ae90 g     F .text	0000009c term_printc_fbg
-0010df20 g     F .text	00000068 vga_putstr
-00105720 g     F .text	00000016 kernel_entry
-0010d790 g     F .text	000000e4 vfs_init
-0010d020 g       .text	00000000 thread_switch
-001050af g       .text	00000000 isr5
+0010f6d0 g     F .text	000000d4 taskbar_update_time
+001093e0 g     F .text	00000119 itoa
+00120008 g     O .bss	00000001 _debugmode
+00105543 g       .text	00000000 isr21
+00102460 g     F .text	0000000a debug_setterm
+00104440 g     F .text	00000047 irq_register
+00102380 g     F .text	0000002e ispunct
+00108300 g     F .text	00000166 gui_draw_scrollbar_y
+0012f1b8 g     O .bss	00000008 rtc_millis
+00110ba0 g     F .text	00000012 winmgr_load
+00107720 g     F .text	000001f8 ps2_init
+0012f180 g     O .bss	00000004 pit_freq
+0010561f g       .text	00000000 irq11
+001033a0 g     F .text	0000004a gdt_init
+0010d610 g     F .text	0000008e gs_tokenize_file
+0012f240 g     O .bss	00000040 _vfs_list
+001023b0 g     F .text	0000001b isspace
+00103c80 g     F .text	0000006a heap_print
+0010fea0 g     F .text	00000012 gui_event_ms_click
+0010f7b0 g     F .text	00000198 taskbar_winbtns_update
+00105589 g       .text	00000000 isr28
+0010db20 g     F .text	00000039 vbe_init
+0010af60 g     F .text	00000260 taskmgr_update
+00107320 g     F .text	00000098 pit_callback
+00109d40 g     F .text	00000049 stradd
+00110330 g     F .text	0000001c gui_window_btnclose_click
+0010ec20 g     F .text	00000025 vga_println
+00106d80 g     F .text	0000017d mem_request
+0010c630 g     F .text	00000011 threadmgr_get_index
+00107030 g     F .text	0000000c mem_valid_index
+00107cb0 g     F .text	000001dd ramfs_read_file
+0010e7e0 g     F .text	00000085 vga_init
+0010d8d0 g     F .text	00000249 vbe_setmode
+001054cd g       .text	00000000 isr8
+00108d90 g     F .text	00000023 stack_remove_at
+001b0048 g     O .bss	00000001 _vbe_enabled
+0010fed0 g     F .text	00000002 gui_event_ms_enter
+001055e3 g       .text	00000000 irq5
+0012f184 g     O .bss	00000004 pit_precise_timer
+001030b1 g     F .text	00000029 expr_typecast_id
+0012f188 g     O .bss	00000004 pit_timelast
+00102fbb g     F .text	00000038 expr_getprec
+00109760 g     F .text	00000023 stream_seek
+0010d740 g     F .text	00000059 gs_is_opstr
+00106800 g     F .text	000000c4 listbox_add
+00120000 g     O .bss	00000004 _cmd_count
+0010d460 g     F .text	000000ea tokenizer_run
+00110120 g     F .text	00000200 gui_draw_window
+0010ebb0 g     F .text	0000002f vga_print_fg
+00108be0 g     F .text	0000001b stack_create
+0010e5d0 g     F .text	00000002 vfs_get_dirs
+001097b0 g     F .text	00000022 stream_peekat
+00105de0 g     F .text	00000006 kbd_get_handler
+00109000 g     F .text	00000032 strstack_clear
+001023f0 g     F .text	00000026 isxdigit
+00107ba0 g     F .text	000000b4 strqueue_dequeue
+00105539 g       .text	00000000 isr20
+00107960 g     F .text	00000041 ps2_callback_ms
+0010efe0 g     F .text	00000017 vga_disablecur
+0012f170 g     O .bss	00000004 _mouse_cycle
+0012f3f0 g     O .bss	00000004 _win_active
+0010f6b0 g     F .text	0000001f taskbar_draw
+00110320 g     F .text	00000005 gui_render_window
+001026f0 g     F .text	0000006c debug_vprintf
+0010b720 g     F .text	00000023 term_printc
+001b004a g       .bss	00000000 _kernel_end
+001107f0 g     F .text	00000028 gui_window_movement
+00103650 g     F .text	000000a2 heap_cleart
+00120230 g     O .bss	00000004 THREAD
+0010e480 g     F .text	00000143 vfs_get_files
+00120234 g     O .bss	00000011 THREADMGR
+001071c0 g     F .text	00000098 pit_init
+001054ff g       .text	00000000 isr14
+0010b680 g     F .text	0000009c term_printc_fbg
+0010e9d0 g     F .text	00000068 vga_putstr
+00105b20 g     F .text	00000016 kernel_entry
+0010dff0 g     F .text	000000e4 vfs_init
+0010d880 g       .text	00000000 thread_switch
+001054af g       .text	00000000 isr5
 0011217b g     O .rodata	00000001 KERNEL_CS_ACCESS
-0010a200 g     F .text	00000005 gui_update_tabpage
-00109780 g     F .text	00000003 strrchr
-00102d2b g     F .text	00000047 expr_isid
-00103f10 g     F .text	000000ef idt_init
-00106770 g     F .text	000001d1 mem_init
-0010e130 g     F .text	00000032 vga_print_fbg
-00105fa0 g     F .text	00000189 gui_update_listbox
-00105270 g     F .text	00000069 kernel_main
-0010ddf0 g     F .text	00000012 vga_newline
-001af000 g       .bss	00000000 _stack_top
-0010d620 g     F .text	00000003 vbe_getfg
+0010a770 g     F .text	00000005 gui_update_tabpage
+00109cf0 g     F .text	00000003 strrchr
+0010311b g     F .text	00000047 expr_isid
+00104310 g     F .text	000000ef idt_init
+00106b80 g     F .text	000001d1 mem_init
+0010ebe0 g     F .text	00000032 vga_print_fbg
+001063a0 g     F .text	00000199 gui_update_listbox
+00105670 g     F .text	00000059 kernel_main
+0010e8a0 g     F .text	00000012 vga_newline
+001b0000 g       .bss	00000000 _stack_top
+0010de80 g     F .text	00000003 vbe_getfg
 001121d1 g     O .rodata	00000001 IDT_EXCEPTION_ATTRS
-00107690 g     F .text	00000016 queue_isdone
-0012e1e4 g     O .bss	00000004 _vbe_modecount
-00108dd0 g     F .text	00000003 atof
-00104ffe g       .text	00000000 _idt_flush
-00102c03 g     F .text	000000be expr_precedence
-001099c0 g     F .text	00000068 strwhite
-0010d5f0 g     F .text	00000003 vbe_getcur_y
-0010d450 g     F .text	00000002 vbe_newline
-0010da30 g     F .text	000000f1 vfs_file_open
-00109440 g     F .text	000000ec strcat
-001af049 g     O .bss	00000001 _vga_enabled
-001051ed g       .text	00000000 irq6
-0010f300 g     F .text	00000022 gui_set_tag
-0010d470 g     F .text	00000002 vbe_scroll
-00107a30 g     F .text	00000023 ramfs_get_files
-0012e2b0 g     O .bss	00000001 _vga_bg
-00103700 g     F .text	00000018 heap_nearest
-0010f130 g     F .text	00000002 gui_event_ms_leave
-0010b530 g     F .text	00000034 term_println_fg
-0010a0b0 g     F .text	00000137 gui_tabctrl_addtab
-001051bb g       .text	00000000 irq1
-00107df0 g     F .text	00000023 rtc_get_time
-0010bdf0 g     F .text	0000000f threadmgr_generate_id
-00102dc1 g     F .text	0000003b expr_stack_push
-0012e174 g     O .bss	00000004 _mouse_x
+00107af0 g     F .text	00000016 queue_isdone
+0012f1e4 g     O .bss	00000004 _vbe_modecount
+00109340 g     F .text	00000003 atof
+001053fe g       .text	00000000 _idt_flush
+00102ff3 g     F .text	000000be expr_precedence
+00109f30 g     F .text	00000068 strwhite
+0010de50 g     F .text	00000003 vbe_getcur_y
+0010dcb0 g     F .text	00000002 vbe_newline
+0010e3b0 g     F .text	000000c4 vfs_file_open
+001099b0 g     F .text	000000ec strcat
+001b0049 g     O .bss	00000001 _vga_enabled
+001055ed g       .text	00000000 irq6
+001100b0 g     F .text	00000022 gui_set_tag
+0010dcd0 g     F .text	00000002 vbe_scroll
+00107e90 g     F .text	00000023 ramfs_get_files
+0012f2b0 g     O .bss	00000001 _vga_bg
+00103b00 g     F .text	00000018 heap_nearest
+0010fee0 g     F .text	00000002 gui_event_ms_leave
+0010bd80 g     F .text	00000034 term_println_fg
+0010a620 g     F .text	00000137 gui_tabctrl_addtab
+001055bb g       .text	00000000 irq1
+00108250 g     F .text	00000023 rtc_get_time
+0010c690 g     F .text	0000000f threadmgr_generate_id
+001031b1 g     F .text	0000003b expr_stack_push
+0012f174 g     O .bss	00000004 _mouse_x
 00112179 g     O .rodata	00000001 KERNEL_CS_FLAGS
-0010e6c0 g     F .text	0000000a vga_setbg
-0010be10 g     F .text	0000000f unlock
-0010d5b0 g     F .text	00000002 vbe_setcur
-0010e5f0 g     F .text	00000048 vga_setcur_y
-001088f0 g     F .text	00000032 charstack_clear
-0010c500 g     F .text	00000060 tokenizer_handle_keyword
+0010f170 g     F .text	0000000a vga_setbg
+0010c6b0 g     F .text	0000000f unlock
+0010de10 g     F .text	00000002 vbe_setcur
+0010f0a0 g     F .text	00000048 vga_setcur_y
+00108e60 g     F .text	00000032 charstack_clear
+0010cd60 g     F .text	00000060 tokenizer_handle_keyword
 00100000 g       .multiboot.text	00000000 _mboot
-0011f260 g     O .bss	00000025 HEAP_LARGE
-001020e0 g     F .text	00000068 debug_printc
-00101460 g     F .text	0000002f cmd_clear
-00103720 g     F .text	0000000e heap_merge
-0010f080 g     F .text	00000002 gui_event_ms_hover
-00105330 g     F .text	00000258 kernel_parse_args
-00102d94 g     F .text	0000002d expr_stack_pushc
+00120260 g     O .bss	00000025 HEAP_LARGE
+001024d0 g     F .text	00000068 debug_printc
+00101470 g     F .text	0000002f cmd_clear
+00103b20 g     F .text	0000000e heap_merge
+0010fe30 g     F .text	00000002 gui_event_ms_hover
+00105730 g     F .text	00000258 kernel_parse_args
+00103184 g     F .text	0000002d expr_stack_pushc
 00101010 g     F .text	0000016e assets_load
-0012e3d4 g     O .bss	00000001 _win_movstart
-001092d0 g     F .text	0000002f memchr
-0010df90 g     F .text	000000be vga_printc_fbg
-001011a0 g     F .text	00000244 gui_draw_button
-00122020 g     O .bss	00000004 _kbd_handler
-0011f004 g     O .bss	00000004 _cmd_list
-0010b230 g     F .text	00000032 term_print
-00105a20 g     F .text	00000005 gui_update_label
-00101dc0 g     F .text	000000ad gui_container_add_widget
-00101cc0 g     F .text	000000fc gui_create_container
-00107a60 g       .text	00000000 int16
-0010baf0 g     F .text	00000013 threadmgr_load
-00108930 g     F .text	00000065 charstack_push
-00122040 g     O .bss	00000100 _kbd_keymap
-0010bc00 g     F .text	000000ae threadmgr_next
-00107270 g     F .text	0000004d ps2_set_smplrate
-0010d4e0 g     F .text	00000002 vbe_printc
-0010be20 g     F .text	00000083 thread_create_kernel
+0012f3dc g     O .bss	00000001 _win_movstart
+00109840 g     F .text	0000002f memchr
+0010ea40 g     F .text	000000be vga_printc_fbg
+001011a0 g     F .text	00000254 gui_draw_button
+00123020 g     O .bss	00000004 _kbd_handler
+00120004 g     O .bss	00000004 _cmd_list
+0010ba60 g     F .text	00000032 term_print
+00105e20 g     F .text	00000005 gui_update_label
+00102150 g     F .text	000000ad gui_container_add_widget
+00102050 g     F .text	000000fc gui_create_container
+00107ec0 g       .text	00000000 int16
+0010c340 g     F .text	00000013 threadmgr_load
+00108ea0 g     F .text	00000065 charstack_push
+00123040 g     O .bss	00000100 _kbd_keymap
+0010c450 g     F .text	000000ae threadmgr_next
+001076d0 g     F .text	0000004d ps2_set_smplrate
+0010dd40 g     F .text	00000002 vbe_printc
+0010c6c0 g     F .text	00000083 thread_create_kernel
 00101000 g       .text	00000000 _start
-001020d0 g     F .text	00000004 debug_breakpoint
-001097a0 g     F .text	00000003 strstr
-00102460 g     F .text	0000002f debug_error
-00106e60 g     F .text	000000b0 pit_calculate
-00108de0 g     F .text	00000003 rand
-00102090 g     F .text	00000014 debug_setmode
-0010d560 g     F .text	00000002 vbe_println_fbg
-0010508d g       .text	00000000 isr1
-00102a9d g     F .text	000000d6 expr_evaluate
-001084f0 g     F .text	00000023 serial_recieved
-0010520b g       .text	00000000 irq9
-0012e188 g     O .bss	00000004 pit_switch_timer
-00101fe0 g     F .text	00000011 isupper
-00109640 g     F .text	0000005d strncmp
-0012e1b8 g     O .bss	0000000a rtc_time
-00101490 g     F .text	0000007c cmd_help
-0010af60 g     F .text	00000023 term_onchar
-001091b0 g     F .text	00000039 stream_dispose
-00106360 g     F .text	0000008f gui_create_listbox
-0010c790 g     F .text	00000060 tokenizer_handle_bool
-0010a1f0 g     F .text	00000005 gui_dispose_tabpage
-00106630 g     F .text	00000078 pow
-00105175 g       .text	00000000 isr26
-001096f0 g     F .text	00000031 strncpy
-0010f330 g     F .text	00000038 gui_dispose_window
-00103810 g     F .text	0000001f heap_validate_addr
-0010e6b0 g     F .text	0000000a vga_setfg
-00108a70 g     F .text	0000001b strstack_create
-001050e7 g       .text	00000000 isr11
-001059f0 g     F .text	0000000d kbd_keydown
+001024c0 g     F .text	00000004 debug_breakpoint
+00109d10 g     F .text	00000003 strstr
+00102850 g     F .text	0000002f debug_error
+00107270 g     F .text	000000b0 pit_calculate
+00109350 g     F .text	00000003 rand
+00102480 g     F .text	00000014 debug_setmode
+0010ddc0 g     F .text	00000002 vbe_println_fbg
+0010548d g       .text	00000000 isr1
+00101630 g     F .text	0000016c cmd_dir
+00102e8d g     F .text	000000d6 expr_evaluate
+00108a60 g     F .text	00000023 serial_recieved
+0010560b g       .text	00000000 irq9
+0012f18c g     O .bss	00000004 pit_switch_timer
+001023d0 g     F .text	00000011 isupper
+00109bb0 g     F .text	0000005d strncmp
+0012f1c0 g     O .bss	0000000a rtc_time
+001014a0 g     F .text	0000007c cmd_help
+0010b750 g     F .text	00000023 term_onchar
+00109720 g     F .text	00000039 stream_dispose
+00106770 g     F .text	0000008f gui_create_listbox
+0010cff0 g     F .text	00000060 tokenizer_handle_bool
+0010a760 g     F .text	00000005 gui_dispose_tabpage
+00106a40 g     F .text	00000078 pow
+00105575 g       .text	00000000 isr26
+00109c60 g     F .text	00000031 strncpy
+001100e0 g     F .text	00000038 gui_dispose_window
+00103c10 g     F .text	0000001f heap_validate_addr
+0010f160 g     F .text	0000000a vga_setfg
+00108fe0 g     F .text	0000001b strstack_create
+001054e7 g       .text	00000000 isr11
+00105df0 g     F .text	0000000d kbd_keydown
 00101180 g     F .text	00000005 gui_dispose_button
-0010b2e0 g     F .text	00000036 term_println
-00122140 g     O .bss	00000001 _kbd_scancode
-0010eb40 g     F .text	0000003b video_getinfo
-001022d0 g     F .text	00000024 debug_println_fg
-0010ddc0 g     F .text	0000002e vga_disable
-0010a210 g     F .text	00000005 gui_draw_tabpage
-00106350 g     F .text	00000005 gui_render_listbox
-001035d0 g     F .text	000000f8 heap_allocate
-0010d880 g     F .text	00000010 vfs_register
-00106f80 g     F .text	00000008 pit_get_millis_total
-00102e60 g     F .text	000000e7 gdt_set_desc
-00104600 g     F .text	0000002c image_blit
-0010c7f0 g     F .text	00000195 tokenizer_handle_word
-00101b10 g     F .text	000000c6 gui_draw_container
-00106d90 g     F .text	0000000d mouse_btn_right
-001074c0 g     F .text	00000034 ps2_write_kbd
-001097b0 g     F .text	00000003 strtok
-0010af90 g     F .text	00000021 term_printc_fg
-00106e50 g     F .text	0000000e pit_disable
-0012e2cc g     O .bss	00000004 _drawtimer
-00109f90 g     F .text	000000a4 gui_tabctrl_btndown
-00109300 g     F .text	00000064 memcmp
-0010d4f0 g     F .text	00000002 vbe_printc_fg
-00108c00 g     F .text	00000044 freearray
-00107680 g     F .text	00000002 queue_dequeue
-0010fa70 g     F .text	00000054 winmgr_init
-0010feb0 g     F .text	0000022c winmgr_update
-0010f8f0 g     F .text	00000146 gui_create_window
-00101ec0 g     F .text	00000014 isalpha
-0012e2b1 g     O .bss	00000001 _vga_cx
-0010ae30 g     F .text	00000057 term_putc
-0010ea80 g     F .text	0000003f video_fetchmodes
-00109530 g     F .text	00000098 strncat
-00102500 g     F .text	00000076 kpanicf
-0010de70 g     F .text	00000042 vga_blit
-00108450 g     F .text	00000029 serial_printc_fg
-00102290 g     F .text	0000000e debug_print
-00108b90 g     F .text	00000046 tmalloc
-0010d930 g     F .text	0000002a vfs_from_letter
-0012e2b2 g     O .bss	00000001 _vga_h
-0010eeb0 g     F .text	00000045 gui_dispose_widget
-00105233 g       .text	00000000 irq13
-0010c560 g     F .text	000000a8 tokenizer_handle_string
-001050ef g       .text	00000000 isr12
-001088b0 g     F .text	00000016 stack_isdone
-0012e3ec g     O .bss	00000004 _win_maxed
-001033c0 g     F .text	00000097 heap_create
-0010b010 g     F .text	0000006d term_printcaret
-00105d80 g     F .text	0000001b list_create
-00108ad0 g     F .text	0000001c strstack_push
-00106f70 g     F .text	00000006 pit_get_millis
-001019b0 g     F .text	00000079 gui_dispose_container
-001093d0 g     F .text	00000052 memset
-001092a0 g     F .text	00000025 stream_isdone
-0012e18c g     O .bss	00000004 pit_switch_freq
-00107110 g     F .text	00000026 ps2_wait_input
-0011f2a0 g     O .bss	00000025 HEAP_SMALL
-0010bd60 g     F .text	00000023 threadmgr_get_byindex
-00120400 g     O .bss	00000004 _idtr
-00103cf0 g     F .text	0000021e idt_init_irqs
-001049b0 g     F .text	000000f9 image_char
-0012e3f0 g     O .bss	00000004 _win_index
-00109ad0 g     F .text	0000004b strback
-0010a570 g     F .text	000000d4 taskmgr_calc_usage
-001097c0 g     F .text	00000003 strxfrm
-0010ae00 g     F .text	00000005 term_onback
-00105086 g       .text	00000000 isr0
-0010bd50 g     F .text	00000010 threadmgr_locate
-0010f220 g     F .text	000000de gui_create_widget
-0010e4d0 g     F .text	00000015 vga_printf
-001051c5 g       .text	00000000 irq2
-0010d580 g     F .text	00000002 vbe_printf
-0010a220 g     F .text	00000005 gui_render_tabpage
-0010bd10 g     F .text	0000000f yieldf
-00108850 g     F .text	00000054 stack_pop
-00102b73 g     F .text	00000058 expr_association
-00104410 g     F .text	00000022 image_dispose
-0010e640 g     F .text	00000043 vga_updatecur
-00101970 g     F .text	00000033 cmdhandler_free_index
-00101f20 g     F .text	00000011 isgraph
-0010ace0 g     F .text	00000022 term_clear_col
-00104090 g     F .text	00000025 irq_unregister
-0010b5b0 g     F .text	00000311 term_vprintf
-00101e90 g     F .text	00000026 isalnum
-0010a230 g     F .text	00000074 gui_create_tabpage
-00107fb0 g     F .text	00000084 serial_setport
-00101f60 g     F .text	00000026 isprint
-0010d4d0 g     F .text	00000002 vbe_putstr
-00103830 g     F .text	00000046 heap_free_index
-00108180 g     F .text	00000245 serial_vprintf
-00105161 g       .text	00000000 isr24
+0010bb10 g     F .text	00000036 term_println
+00123140 g     O .bss	00000001 _kbd_scancode
+0010f670 g     F .text	0000003b video_getinfo
+001026c0 g     F .text	00000024 debug_println_fg
+0010e870 g     F .text	0000002e vga_disable
+0010a780 g     F .text	00000005 gui_draw_tabpage
+00106760 g     F .text	00000005 gui_render_listbox
+001039d0 g     F .text	000000f8 heap_allocate
+0010e0e0 g     F .text	00000010 vfs_register
+001073e0 g     F .text	00000008 pit_get_millis_total
+00103250 g     F .text	000000e7 gdt_set_desc
+00104a00 g     F .text	0000002c image_blit
+0010d050 g     F .text	00000195 tokenizer_handle_word
+00101dc0 g     F .text	000000c6 gui_draw_container
+001071a0 g     F .text	0000000d mouse_btn_right
+00110ea0 g     F .text	00000006 winmgr_get_active
+00107920 g     F .text	00000034 ps2_write_kbd
+00109d20 g     F .text	00000003 strtok
+0010b780 g     F .text	00000021 term_printc_fg
+00107260 g     F .text	0000000e pit_disable
+0012f2cc g     O .bss	00000004 _drawtimer
+0010a500 g     F .text	000000a4 gui_tabctrl_btndown
+00109870 g     F .text	00000064 memcmp
+0010dd50 g     F .text	00000002 vbe_printc_fg
+00109170 g     F .text	00000044 freearray
+00107ae0 g     F .text	00000002 queue_dequeue
+00110820 g     F .text	00000054 winmgr_init
+00110c60 g     F .text	0000022c winmgr_update
+001106a0 g     F .text	00000146 gui_create_window
+001022b0 g     F .text	00000014 isalpha
+0012f2b1 g     O .bss	00000001 _vga_cx
+0010b620 g     F .text	00000057 term_putc
+0010f5a0 g     F .text	0000003f video_fetchmodes
+00109aa0 g     F .text	00000098 strncat
+001028f0 g     F .text	00000076 kpanicf
+0010e920 g     F .text	00000042 vga_blit
+001089c0 g     F .text	00000029 serial_printc_fg
+00102680 g     F .text	0000000e debug_print
+00109100 g     F .text	00000046 tmalloc
+0010e190 g     F .text	0000004b vfs_from_letter
+0012f2b2 g     O .bss	00000001 _vga_h
+0010fc60 g     F .text	00000045 gui_dispose_widget
+00105633 g       .text	00000000 irq13
+0010cdc0 g     F .text	000000a8 tokenizer_handle_string
+001054ef g       .text	00000000 isr12
+00108e20 g     F .text	00000016 stack_isdone
+0012f3f4 g     O .bss	00000004 _win_maxed
+001037c0 g     F .text	00000097 heap_create
+0010b800 g     F .text	00000079 term_printcaret
+00106180 g     F .text	0000001b list_create
+00109040 g     F .text	0000001c strstack_push
+001073d0 g     F .text	00000006 pit_get_millis
+00101c60 g     F .text	00000079 gui_dispose_container
+00109940 g     F .text	00000052 memset
+00109810 g     F .text	00000025 stream_isdone
+0012f190 g     O .bss	00000004 pit_switch_freq
+00107570 g     F .text	00000026 ps2_wait_input
+001202a0 g     O .bss	00000025 HEAP_SMALL
+0010c600 g     F .text	00000023 threadmgr_get_byindex
+00121400 g     O .bss	00000004 _idtr
+001040f0 g     F .text	0000021e idt_init_irqs
+00104db0 g     F .text	000000f9 image_char
+0012f3f8 g     O .bss	00000004 _win_index
+0010a040 g     F .text	0000004b strback
+00109d30 g     F .text	00000003 strxfrm
+0010ac60 g     F .text	0000010a taskmgr_calc_usage
+0010b530 g     F .text	00000005 term_onback
+00105486 g       .text	00000000 isr0
+0010c5f0 g     F .text	00000010 threadmgr_locate
+0010ffd0 g     F .text	000000de gui_create_widget
+0010ef80 g     F .text	00000015 vga_printf
+001055c5 g       .text	00000000 irq2
+0010dde0 g     F .text	00000002 vbe_printf
+0010a790 g     F .text	00000005 gui_render_tabpage
+0010c580 g     F .text	00000012 yieldf
+00108dc0 g     F .text	00000054 stack_pop
+00102f63 g     F .text	00000058 expr_association
+00104810 g     F .text	00000022 image_dispose
+0010f0f0 g     F .text	00000043 vga_updatecur
+00101c10 g     F .text	00000033 cmdhandler_free_index
+00102310 g     F .text	00000011 isgraph
+0010b410 g     F .text	00000022 term_clear_col
+00104490 g     F .text	00000025 irq_unregister
+0010be00 g     F .text	00000311 term_vprintf
+00102280 g     F .text	00000026 isalnum
+0010a7a0 g     F .text	00000074 gui_create_tabpage
+00108520 g     F .text	00000084 serial_setport
+00102350 g     F .text	00000026 isprint
+0010dd30 g     F .text	00000002 vbe_putstr
+00103c30 g     F .text	00000046 heap_free_index
+001086f0 g     F .text	00000245 serial_vprintf
+00105561 g       .text	00000000 isr24
 00101190 g     F .text	00000005 gui_update_button
-0012e190 g     O .bss	00000008 pit_ticks
-0010cea0 g     F .text	00000033 gs_is_op
-00105111 g       .text	00000000 isr16
-001013f0 g     F .text	00000005 gui_render_button
-0010a650 g     F .text	000001e9 taskmgr_update_strings
-0012e3f4 g     O .bss	00000004 _win_top
-00109600 g     F .text	0000003e strcmp
-0012e3f8 g     O .bss	00000001 _win_msdown
-00105740 g     F .text	0000001c kernel_get_size
-0012e2b3 g     O .bss	00000001 _vga_cy
-00121000 g     O .bss	00000800 idt
-0012e2d0 g     O .bss	00000004 _vidtime
-0010c610 g     F .text	000000a8 tokenizer_handle_char
-0010eea0 g     F .text	00000002 gui_draw_widget
-00106c30 g     F .text	0000006b mouse_move
-0010e860 g     F .text	00000123 video_update_strings
-0012e3d8 g     O .bss	00000004 _win_movx
-0010509b g       .text	00000000 isr3
-001075c0 g     F .text	00000032 queue_clear
-00104440 g     F .text	00000189 image_resize
-001083f0 g     F .text	00000052 serial_setcol
-00109d20 g     F .text	000001b2 gui_update_tabctrl
-0012e200 g     O .bss	00000032 _vbe_modeinfo
-00109730 g     F .text	00000003 strcspn
-0010c060 g     F .text	00000134 threadmgr_init
-00102400 g     F .text	0000002f debug_ok
-00109010 g     F .text	0000001a ltoa
-001024b0 g     F .text	00000049 kpanic
-0010ca70 g     F .text	00000189 tokenizer_handle
-0010d630 g     F .text	00000003 vbe_getbg
-0010d480 g     F .text	00000027 vbe_clear
-00103390 g     F .text	00000022 heap_free
-00101e70 g     F .text	00000002 gui_container_remove_widget
-0012e198 g     O .bss	00000004 pit_timer
-001052e0 g     F .text	00000049 idle_main
-00122000 g     O .bss	00000006 idtr
-0010d5d0 g     F .text	00000002 vbe_setcur_y
-0010e6d0 g     F .text	00000008 vga_getfg
-0010d610 g     F .text	00000002 vbe_setbg
-00106d50 g     F .text	0000000b mouse_overflow
-0010ef00 g     F .text	00000179 gui_update_widget
-00108700 g     F .text	00000113 stack_remove
-001050b9 g       .text	00000000 isr6
-00107e30 g     F .text	00000065 gui_update_scrollbar_y
-0012e2e0 g     O .bss	000000ed _vidctrl
-0010fe10 g     F .text	00000017 winmgr_unload
-0010ec80 g     F .text	00000214 video_main
-001051f7 g       .text	00000000 irq7
-00101e80 g     F .text	00000002 gui_container_remove_widget_at
-001040e0 g     F .text	00000046 irq_handler
+0012f198 g     O .bss	00000008 pit_ticks
+0010d700 g     F .text	00000033 gs_is_op
+00105511 g       .text	00000000 isr16
+00101400 g     F .text	00000005 gui_render_button
+0010ad70 g     F .text	000001e9 taskmgr_update_strings
+0012f3fc g     O .bss	00000004 _win_top
+00109b70 g     F .text	0000003e strcmp
+0012f400 g     O .bss	00000001 _win_msdown
+00105b40 g     F .text	0000001c kernel_get_size
+0012f2b3 g     O .bss	00000001 _vga_cy
+00122000 g     O .bss	00000800 idt
+0012f2d0 g     O .bss	00000004 _vidtime
+0010ce70 g     F .text	000000a8 tokenizer_handle_char
+0010fc50 g     F .text	00000002 gui_draw_widget
+00107040 g     F .text	0000006b mouse_move
+0010f380 g     F .text	00000123 video_update_strings
+0012f3e0 g     O .bss	00000004 _win_movx
+0010549b g       .text	00000000 isr3
+00107a20 g     F .text	00000032 queue_clear
+0010a830 g     F .text	000000fa taskmgr_btn_threadterm
+00104840 g     F .text	00000189 image_resize
+00108960 g     F .text	00000052 serial_setcol
+0010a290 g     F .text	000001b2 gui_update_tabctrl
+0012f200 g     O .bss	00000032 _vbe_modeinfo
+00109ca0 g     F .text	00000003 strcspn
+0010c750 g     F .text	00000104 threadmgr_init
+001027f0 g     F .text	0000002f debug_ok
+00109580 g     F .text	0000001a ltoa
+001028a0 g     F .text	00000049 kpanic
+0010d2d0 g     F .text	00000189 tokenizer_handle
+0010de90 g     F .text	00000003 vbe_getbg
+0010dce0 g     F .text	00000027 vbe_clear
+00103790 g     F .text	00000022 heap_free
+00102200 g     F .text	00000049 gui_container_remove_widget
+0012f1a0 g     O .bss	00000004 pit_timer
+001056d0 g     F .text	00000059 idle_main
+00123000 g     O .bss	00000006 idtr
+0010de30 g     F .text	00000002 vbe_setcur_y
+0010f180 g     F .text	00000008 vga_getfg
+0010de70 g     F .text	00000002 vbe_setbg
+00107160 g     F .text	0000000b mouse_overflow
+0010fcb0 g     F .text	00000179 gui_update_widget
+00108c70 g     F .text	00000113 stack_remove
+001054b9 g       .text	00000000 isr6
+00108290 g     F .text	00000065 gui_update_scrollbar_y
+0012f2e0 g     O .bss	000000ed _vidctrl
+00110bc0 g     F .text	00000017 winmgr_unload
+0010f9e0 g     F .text	00000264 video_main
+0010f1a0 g     F .text	00000068 taskbar_winbtn_down
+001055f7 g       .text	00000000 irq7
+00102250 g     F .text	00000022 gui_container_remove_widget_at
+001044e0 g     F .text	00000046 irq_handler
 00114fc0 g     O .rodata	0000000a _vidname
-00108040 g     F .text	00000008 serial_getport
-0010ad10 g     F .text	00000042 term_newline
-00109220 g     F .text	0000001a stream_peek
-0010a2b0 g     F .text	00000005 taskmgr_draw
-0012e164 g     O .bss	00000004 _mem_count
-0012e168 g     O .bss	00000004 _mem_start
-001020c0 g     F .text	00000004 debug_halt
-0010db30 g     F .text	00000036 vfs_free_index
-0010d460 g     F .text	00000002 vbe_delete
-0012e19c g     O .bss	00000004 pit_millis_total
-0010ae10 g     F .text	00000012 term_scroll
-00106130 g     F .text	00000214 gui_draw_listbox
-00107a60 g       .text	00000000 _int32
-0010e5a0 g     F .text	00000049 vga_setcur_x
-0012e3d0 g     O .bss	00000004 _vidtimelast
-0010d5e0 g     F .text	00000002 vbe_getcur_x
-00107c30 g     F .text	00000141 rtc_read
-00105125 g       .text	00000000 isr18
-0010e550 g     F .text	0000004e vga_setcur
-0010fe30 g     F .text	0000007b winmgr_set_active
-0012f000 g       .bss	00000000 _stack_bottom
-00104000 g     F .text	00000040 idt_set_desc
-0010c230 g     F .text	00000226 timestr
-001080b0 g     F .text	0000002a serial_read
-001023d0 g     F .text	0000002f debug_info
-00101f00 g     F .text	00000011 isdigit
-00107d80 g     F .text	00000069 rtc_callback
-00109030 g     F .text	00000137 strhex
-001051b1 g       .text	00000000 irq0
-00107e20 g     F .text	00000005 gui_dispose_scrollbar_y
-0011f2c8 g     O .bss	0000000c RAMFS
-00108520 g     F .text	00000023 serial_send
-0010d590 g     F .text	00000002 vbe_enablecur
-0010acc0 g     F .text	00000012 term_clear
-0012e3dc g     O .bss	00000004 _win_movy
-0010cf40 g     F .text	00000036 gs_is_sym
-001021a0 g     F .text	0000009c debug_printc_fg
-00103900 g     F .text	000003f0 idt_init_exceptions
-0010c460 g     F .text	00000017 timenow
-0010f1a0 g     F .text	00000012 gui_set_text
-00102cea g     F .text	0000003e expr_typecast_op
-00108f90 g     F .text	00000071 ultoa
-00106ca0 g     F .text	000000ab mouse_handle
-0010d510 g     F .text	00000002 vbe_print
-0010cfe0 g     F .text	00000034 gs_symtype
+001085b0 g     F .text	00000008 serial_getport
+0010b440 g     F .text	00000042 term_newline
+00109790 g     F .text	0000001a stream_peek
+0010a820 g     F .text	00000005 taskmgr_draw
+0012f164 g     O .bss	00000004 _mem_count
+0012f168 g     O .bss	00000004 _mem_start
+001024b0 g     F .text	00000004 debug_halt
+0010e5e0 g     F .text	00000036 vfs_free_index
+0010dcc0 g     F .text	00000002 vbe_delete
+0012f1a4 g     O .bss	00000004 pit_millis_total
+0010b540 g     F .text	00000012 term_scroll
+00106540 g     F .text	00000214 gui_draw_listbox
+00107ec0 g       .text	00000000 _int32
+0010f050 g     F .text	00000049 vga_setcur_x
+0012f3d0 g     O .bss	00000004 _vidtimelast
+0010de40 g     F .text	00000002 vbe_getcur_x
+00108090 g     F .text	00000141 rtc_read
+00105525 g       .text	00000000 isr18
+0010f000 g     F .text	0000004e vga_setcur
+00110be0 g     F .text	0000007b winmgr_set_active
+00130000 g       .bss	00000000 _stack_bottom
+00104400 g     F .text	00000040 idt_set_desc
+0010caa0 g     F .text	00000226 timestr
+001017a0 g     F .text	000000ba cmd_cd
+00108620 g     F .text	0000002a serial_read
+001027c0 g     F .text	0000002f debug_info
+001022f0 g     F .text	00000011 isdigit
+001081e0 g     F .text	00000069 rtc_callback
+001095a0 g     F .text	00000137 strhex
+001055b1 g       .text	00000000 irq0
+00108280 g     F .text	00000005 gui_dispose_scrollbar_y
+001202c8 g     O .bss	0000000c RAMFS
+00108a90 g     F .text	00000023 serial_send
+0010ddf0 g     F .text	00000002 vbe_enablecur
+0010b3f0 g     F .text	00000012 term_clear
+0012f3e4 g     O .bss	00000004 _win_movy
+0010d7a0 g     F .text	00000036 gs_is_sym
+00102590 g     F .text	0000009c debug_printc_fg
+00103d00 g     F .text	000003f0 idt_init_exceptions
+0010ccd0 g     F .text	00000017 timenow
+0010ff50 g     F .text	00000012 gui_set_text
+001030da g     F .text	0000003e expr_typecast_op
+00101c50 g     F .text	00000002 cmd_view
+00109500 g     F .text	00000071 ultoa
+001070b0 g     F .text	000000ab mouse_handle
+0010dd70 g     F .text	00000002 vbe_print
+0010d840 g     F .text	00000034 gs_symtype
 00112178 g     O .rodata	00000001 KERNEL_DS_FLAGS
-001016a0 g     F .text	00000073 cmdhandler_init
-0012e1c4 g     O .bss	00000004 rtc_last_sec
-0010d4c0 g     F .text	00000002 vbe_putc
-001050df g       .text	00000000 isr10
-0010e690 g     F .text	00000008 vga_getcur_x
-00108df0 g     F .text	00000002 exit
-00105f70 g     F .text	00000026 gui_dispose_listbox
-001af020 g     O .bss	00000028 NULL_RAMFS_FILE
-00104680 g     F .text	000000b8 image_rect
-0011f2e0 g     O .bss	00000075 ASSETS
-00109a30 g     F .text	00000050 strupper
-00102582 g     F .text	0000051b expr_execute
-001015f0 g     F .text	000000a4 cmdhandler_register
-001089d0 g     F .text	00000099 charstack_pop
-0012e280 g     O .bss	00000026 _ramfs_host
-0010e4f0 g     F .text	00000033 vga_enablecur
-001086d0 g     F .text	00000023 stack_push
-00106d60 g     F .text	00000006 mouse_getx
-00108d00 g     F .text	00000005 atoi
-00101ee0 g     F .text	00000016 iscntrl
-0010c9e0 g     F .text	00000085 tokenizer_handle_symbol
-00107800 g     F .text	00000042 ramfs_init
-00106f90 g     F .text	00000006 pit_get_seconds
-0010511b g       .text	00000000 isr17
-0010f0a0 g     F .text	00000049 gui_event_refresh
-001064d0 g     F .text	00000017 clamp
-00105094 g       .text	00000000 isr2
-0010d960 g     F .text	000000b0 vfs_file_exists
-0010e050 g     F .text	0000001f vga_printc
-00104ed0 g     F .text	0000007c image_copy_partial
-00108170 g     F .text	00000009 serial_newline
-0010512f g       .text	00000000 isr19
-00101be0 g     F .text	000000d6 gui_render_container
-0010da10 g     F .text	0000001d vfs_dir_exists
-0010b080 g     F .text	00000132 term_update
-001045d0 g     F .text	00000021 image_clear
-00104230 g     F .text	00000007 image_create_existing
-001af000 g     O .bss	00000004 _debugterm
-00109790 g     F .text	00000003 strspn
-00105790 g     F .text	00000028 kbd_update_keymap
-00103460 g     F .text	000000e7 heap_init
-0010519d g       .text	00000000 isr30
-0010d540 g     F .text	00000002 vbe_println
-00102370 g     F .text	00000015 debug_printf
-0012e1a0 g     O .bss	00000004 pit_seconds
-00105da0 g     F .text	0000002c list_clear
-00109740 g     F .text	00000022 strlen
+00101910 g     F .text	000000a8 cmdhandler_init
+0012f1cc g     O .bss	00000004 rtc_last_sec
+0010dd20 g     F .text	00000002 vbe_putc
+001054df g       .text	00000000 isr10
+0010f140 g     F .text	00000008 vga_getcur_x
+00109360 g     F .text	00000002 exit
+00106370 g     F .text	00000026 gui_dispose_listbox
+001b0020 g     O .bss	00000028 NULL_RAMFS_FILE
+0012f3d4 g     O .bss	00000004 _last_winactive
+00104a80 g     F .text	000000b8 image_rect
+001202e0 g     O .bss	00000075 ASSETS
+00109fa0 g     F .text	00000050 strupper
+00102972 g     F .text	0000051b expr_execute
+00101860 g     F .text	000000a4 cmdhandler_register
+00108f40 g     F .text	00000099 charstack_pop
+0012f280 g     O .bss	00000026 _ramfs_host
+0010efa0 g     F .text	00000033 vga_enablecur
+00108c40 g     F .text	00000023 stack_push
+00107170 g     F .text	00000006 mouse_getx
+00109270 g     F .text	00000005 atoi
+001022d0 g     F .text	00000016 iscntrl
+0010d240 g     F .text	00000085 tokenizer_handle_symbol
+00107c60 g     F .text	00000042 ramfs_init
+001073f0 g     F .text	00000006 pit_get_seconds
+0012f3d8 g     O .bss	00000004 _last_wincount
+0010551b g       .text	00000000 isr17
+0010fe50 g     F .text	00000049 gui_event_refresh
+001068e0 g     F .text	00000017 clamp
+00105494 g       .text	00000000 isr2
+0010e290 g     F .text	00000100 vfs_file_exists
+0010eb00 g     F .text	0000001f vga_printc
+001052d0 g     F .text	0000007c image_copy_partial
+001086e0 g     F .text	00000009 serial_newline
+0010552f g       .text	00000000 isr19
+00101e90 g     F .text	000000d6 gui_render_container
+0010e390 g     F .text	00000013 vfs_dir_exists
+0010b880 g     F .text	00000132 term_update
+001049d0 g     F .text	00000021 image_clear
+00104630 g     F .text	00000007 image_create_existing
+001b0000 g     O .bss	00000004 _debugterm
+00109d00 g     F .text	00000003 strspn
+00105b90 g     F .text	00000028 kbd_update_keymap
+00103860 g     F .text	000000e7 heap_init
+0010559d g       .text	00000000 isr30
+0010dda0 g     F .text	00000002 vbe_println
+00102760 g     F .text	00000015 debug_printf
+0012f1a8 g     O .bss	00000004 pit_seconds
+001061a0 g     F .text	0000002c list_clear
+00109cb0 g     F .text	00000022 strlen
 00100000 g       .multiboot.text	00000000 _kernel_start
-00102050 g     F .text	00000011 toupper
-0010d310 g     F .text	00000038 vbe_populate
-00104fe0 g       .text	00000000 _gdt_flush
-0010d5a0 g     F .text	00000002 vbe_disablecur
-0010e1e0 g     F .text	0000004c vga_println_fbg
-001064c0 g     F .text	0000000a abs
-00105247 g       .text	00000000 irq15
-001095d0 g     F .text	00000024 strchr
-0010e6e0 g     F .text	00000008 vga_getbg
-00103730 g     F .text	00000075 heap_calc_used
-001089a0 g     F .text	00000023 charstack_remove_at
-00106950 g     F .text	0000001b mem_map
-0010beb0 g     F .text	000001a6 thread_create
-001075a0 g     F .text	0000001b queue_create
-001050c3 g       .text	00000000 isr7
-001071b0 g     F .text	0000003c ps2_sendcmd_ext
-0012e2b4 g     O .bss	00000001 _vga_fg
-00105990 g     F .text	0000003f kbd_handle
-0010cf80 g     F .text	0000005c gs_is_symstr
-0012e178 g     O .bss	00000003 _mouse_packet
-0010eac0 g     F .text	00000074 video_init
-00107230 g     F .text	0000003d ps2_write_ms
-0010516b g       .text	00000000 isr25
-00109ee0 g     F .text	00000096 gui_draw_tabctrl
-00105e50 g     F .text	00000113 list_remove
+00102440 g     F .text	00000011 toupper
+0010db70 g     F .text	00000038 vbe_populate
+001053e0 g       .text	00000000 _gdt_flush
+0010de00 g     F .text	00000002 vbe_disablecur
+0010ec90 g     F .text	0000004c vga_println_fbg
+001068d0 g     F .text	0000000a abs
+00105647 g       .text	00000000 irq15
+00109b40 g     F .text	00000024 strchr
+0010f190 g     F .text	00000008 vga_getbg
+00103b30 g     F .text	00000075 heap_calc_used
+00108f10 g     F .text	00000023 charstack_remove_at
+00106d60 g     F .text	0000001b mem_map
+0010c860 g     F .text	000001a6 thread_create
+00107a00 g     F .text	0000001b queue_create
+001054c3 g       .text	00000000 isr7
+00107610 g     F .text	0000003c ps2_sendcmd_ext
+0012f2b4 g     O .bss	00000001 _vga_fg
+00105d90 g     F .text	0000003f kbd_handle
+0010d7e0 g     F .text	0000005c gs_is_symstr
+0012f178 g     O .bss	00000003 _mouse_packet
+0010f5e0 g     F .text	00000088 video_init
+00107690 g     F .text	0000003d ps2_write_ms
+0010556b g       .text	00000000 isr25
+0010a450 g     F .text	00000096 gui_draw_tabctrl
+00106250 g     F .text	00000113 list_remove
 001121d0 g     O .rodata	00000001 IDT_IRQ_ATTRS
-0010b270 g     F .text	00000032 term_print_fg
-00105d00 g     F .text	00000005 gui_render_label
-0010e230 g     F .text	00000295 vga_vprintf
-0010e0d0 g     F .text	00000030 vga_print
-0012e1c8 g     O .bss	00000004 rtc_cur_sec
-00101510 g     F .text	000000d8 cmd_exec
-0010bd40 g     F .text	0000000e threadmgr_terminate
-0010b1c0 g     F .text	0000006b term_onenter
-0012e1a4 g     O .bss	00000004 pit_millis
-00108480 g     F .text	00000026 serial_print_fg
-0010e990 g     F .text	000000e9 video_setmode
-00104240 g     F .text	000001c4 image_load
-00107600 g     F .text	00000077 queue_enqueue
-0010de40 g     F .text	00000022 vga_clear
-0010b320 g     F .text	00000205 term_create
-00106be0 g     F .text	00000036 mem_free_index
-0010aa20 g     F .text	00000041 term_draw
-001051d9 g       .text	00000000 irq4
-00109770 g     F .text	00000003 strpbrk
-001051cf g       .text	00000000 irq3
-0010d300 g     F .text	00000002 vbe_disable
-00104740 g     F .text	00000264 image_rect3d
-001040c0 g     F .text	0000001e exception_handler
-0010c6c0 g     F .text	00000060 tokenizer_handle_dec
-00108be0 g     F .text	00000012 free
-00104b50 g     F .text	0000005f image_copy_trans
-001036d0 g     F .text	00000023 heap_delete
-001020b0 g     F .text	00000008 debug_getmode
-0010d550 g     F .text	00000002 vbe_println_fg
-0010f090 g     F .text	00000002 gui_render_widget
-0010d6a0 g     F .text	000000ec vfs_create
-0012e17b g     O .bss	00000001 _mouse_handled
+0010baa0 g     F .text	00000032 term_print_fg
+00106100 g     F .text	00000005 gui_render_label
+0010ece0 g     F .text	00000295 vga_vprintf
+0010eb80 g     F .text	00000030 vga_print
+0012f1d0 g     O .bss	00000004 rtc_cur_sec
+00101520 g     F .text	00000108 cmd_exec
+0010c5e0 g     F .text	0000000e threadmgr_terminate
+0010b9c0 g     F .text	0000009f term_onenter
+0012f1ac g     O .bss	00000004 pit_millis
+001089f0 g     F .text	00000026 serial_print_fg
+0010f4b0 g     F .text	000000e9 video_setmode
+00104640 g     F .text	000001c4 image_load
+00107a60 g     F .text	00000077 queue_enqueue
+0010e8f0 g     F .text	00000022 vga_clear
+0010bb50 g     F .text	00000225 term_create
+00106ff0 g     F .text	00000036 mem_free_index
+0010b1c0 g     F .text	00000041 term_draw
+001055d9 g       .text	00000000 irq4
+00109ce0 g     F .text	00000003 strpbrk
+001055cf g       .text	00000000 irq3
+0010db60 g     F .text	00000002 vbe_disable
+00104b40 g     F .text	00000264 image_rect3d
+001044c0 g     F .text	0000001e exception_handler
+0010cf20 g     F .text	00000060 tokenizer_handle_dec
+00109150 g     F .text	00000012 free
+00104f50 g     F .text	0000005f image_copy_trans
+00103ad0 g     F .text	00000023 heap_delete
+001024a0 g     F .text	00000008 debug_getmode
+0010ddb0 g     F .text	00000002 vbe_println_fg
+0010fe40 g     F .text	00000002 gui_render_widget
+0010df00 g     F .text	000000ec vfs_create
+0012f17b g     O .bss	00000001 _mouse_handled
 
 

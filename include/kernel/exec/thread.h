@@ -33,7 +33,8 @@ typedef struct
     uint32_t       stack_size;
     char**         args;
     uint32_t       args_count;
-    uint32_t       tps, ticks, time, timelast;
+    uint32_t       tps, ticks, time, timelast, pticks, ptps;
+    uint32_t       cpu_usage;
     uint32_t       id;
     char           name[256];
 } PACKED thread_t;

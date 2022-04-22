@@ -18,6 +18,7 @@ uint32_t      pit_timer;
 uint32_t      pit_millis, pit_seconds;
 uint32_t      pit_millis_total;
 uint32_t      pit_precise_timer;
+uint32_t      pit_timelast;
 
 void pit_init(uint32_t freq)
 {
@@ -60,7 +61,19 @@ void pit_callback(irq_regs_t* regs)
 {
     irq_ack(regs);
 
+    if (pit_seconds != pit_timelast)
+    {
+        pit_timelast = pit_seconds;
+        taskmgr_calc_usage();
+        if (THREAD != NULL) { THREAD->ptps = THREAD->pticks; THREAD->pticks = 0; }
+    }
+
     pit_calculate();
+
+    if (THREAD != NULL) 
+    { 
+        THREAD->pticks++; 
+    }
 
     pit_switch_timer++;
     if (pit_switch_timer >= pit_switch_freq)

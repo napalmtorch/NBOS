@@ -21,21 +21,19 @@ heap_t heap_init(uint32_t size, uint32_t count, uint32_t align, bool msg)
 
 int heap_cleart(int argc, char** argv)
 {
-    lock();
     heap_t* heap = argv[1];
     if (heap == NULL) { return 1; }
     int count = 0;
     for (uint32_t i = 0; i < heap->max; i++)
     {
-        if (heap->entries[i].ptr == NULL || heap->entries[i].size == 0 || heap->entries[i].type == MEMTYPE_RESERVED || heap->entries[i].thread == NULL) { continue; }
-        if (heap->entries[i].type != MEMTYPE_FREE) 
+        if (heap->entries[i].ptr == NULL || heap->entries[i].size == 0 || heap->entries[i].type == MEMTYPE_RESERVED || heap->entries[i].thread == NULL) { yield(); }
+        else if (heap->entries[i].type != MEMTYPE_FREE) 
         { 
-            if (!threadmgr_exists(heap->entries[i].thread)) { heap_free(heap, heap->entries[i].ptr); count++; }
+            if (!threadmgr_exists(heap->entries[i].thread)) { heap_free(heap, heap->entries[i].ptr); count++; yield(); }
         }
     }
     heap_merge(heap);
     //debug_info("Freed %d dead pointers", count);
-    unlock();
     return 0;
 }
 
@@ -53,7 +51,7 @@ void heap_clean(heap_t* heap)
 
         thread_t* t = thread_create("memclean", TSTACK_DEFAULT, heap_cleart, 1, newargs);
         threadmgr_load(t);
-        unlock();
+        yield();
     }
 }
 
@@ -172,6 +170,7 @@ void heap_merge(heap_t* heap)
             heap_delete(heap, nearest);
             count++;
         }
+        yieldf();
     }
 
     if (heap->entries[0].type == MEMTYPE_FREE)
@@ -184,6 +183,7 @@ void heap_merge(heap_t* heap)
             heap_delete(heap, nearest);
             count++;
         }
+        yieldf();
     }
 }
 

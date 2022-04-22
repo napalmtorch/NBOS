@@ -19,3 +19,6 @@ int  cmdhandler_execute(char* input, terminal_t* term);
 int cmd_clear(int argc, char** argv);
 int cmd_help(int argc, char** argv);
 int cmd_exec(int argc, char** argv);
+int cmd_dir(int argc, char** argv);
+int cmd_cd(int argc, char** argv);
+int cmd_view(int argc, char** argv);

@@ -13,6 +13,7 @@ typedef struct
     uint32_t            fg, bg;
     uint32_t            old_w, old_h;
     image_t             buffer;
+    char*               path;
     kbd_handler_t  kb;
 } PACKED terminal_t;
 
@@ -47,3 +48,5 @@ void term_println_fbg(terminal_t* term, char* str, uint32_t fg, uint32_t bg);
 
 void term_vprintf(terminal_t* term, char* str, va_list args);
 void term_printf(terminal_t* term, char* str, ...);
+
+char* term_getfullpath(terminal_t* term, char* path);

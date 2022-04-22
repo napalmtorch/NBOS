@@ -41,7 +41,8 @@ void gui_draw_button(gui_button_t* button)
 
     if (button->base.theme.border_style == BORDERSTYLE_3D)
     {
-        image_rect3d(&buff, button->base.bounds.x + sx, button->base.bounds.y + sy, button->base.bounds.width, button->base.bounds.height, button->base.flags.down, 
+        bool down = (button->base.flags.down || (button->can_toggle && button->base.flags.toggled));
+        image_rect3d(&buff, button->base.bounds.x + sx, button->base.bounds.y + sy, button->base.bounds.width, button->base.bounds.height, down, 
                         button->base.theme.colors[THEME_BORDER], button->base.theme.colors[THEME_BORDER_INNER], button->base.theme.colors[THEME_BORDER_OUTER]);
     }
 

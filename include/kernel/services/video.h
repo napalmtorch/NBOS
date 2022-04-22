@@ -10,8 +10,9 @@ struct taskbar_t
 {
     gui_container_t base;
     gui_label_t*    label_time;
+    gui_button_t**  winbtns;
+    uint32_t        winbtns_count;
 };
-
 
 typedef struct
 {
@@ -38,3 +39,7 @@ void video_init(videomode_t mode);
 void video_setmode(int w, int h);
 void video_fetchmodes();
 videoctrl_t video_getinfo();
+
+void taskbar_winbtns_update(taskbar_t* taskbar);
+void taskbar_winbtns_update_active(taskbar_t* taskbar);
+void taskbar_winbtn_down(gui_button_t* btn);

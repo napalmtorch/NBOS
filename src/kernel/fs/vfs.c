@@ -60,7 +60,7 @@ vfs_t* vfs_from_letter(char letter)
     for (int i = 0; i < VFS_COUNT; i++)
     {
         if (_vfs_list[i] == NULL) { continue; }
-        if (_vfs_list[i]->letter == letter) { return _vfs_list[i]; }
+        if (_vfs_list[i]->letter == toupper(letter)) { return _vfs_list[i]; }
     }
     return NULL;
 }
@@ -69,26 +69,32 @@ bool vfs_file_exists(char* fname)
 {
     if (fname == NULL) { return false; }
 
-    char letter = vfs_convert_path(fname);
-    if (letter == 0) { return false; }
+    char* filename = tmalloc(strlen(fname) + 1, MEMTYPE_STRING);
+    strcpy(filename, fname);
+
+    char letter = vfs_convert_path(filename);
+    if (letter == 0) { free(filename); return false; }
 
     vfs_t* vfs = vfs_from_letter(letter);
-    if (vfs == NULL) { return false; }
+    if (vfs == NULL) { free(filename); return false; }
 
     if (vfs->type == VFSTYPE_RAMFS)
     {
         ramfs_t* ramfs = vfs->fshost;
         for (int i = 0; i < RAMFS.info->count_max; i++)
         {
-            if (!strcmp(ramfs->info->files[i].name, fname)) { return true; }
+            if (!strcmp(ramfs->info->files[i].name, filename)) { free(filename); return true; }
         }
+        free(filename);
         return false;
     }
 
     if (vfs->type == VFSTYPE_DISKFS)
     {
+        free(filename);
         return false;
     }
+    free(filename);
     return false;
 }
 
@@ -96,18 +102,29 @@ bool vfs_dir_exists(char* path)
 {
     if (path == NULL) { return false; }
 
-    char letter = vfs_convert_path(path);
-    if (letter == 0) { return false; }
+    char* p = tmalloc(strlen(path) + 1, MEMTYPE_STRING);
+    strcpy(p, path);
+
+    char letter = vfs_convert_path(p);
+    if (letter == 0) { free(p); return false; }
 
     vfs_t* vfs = vfs_from_letter(letter);
-    if (vfs == NULL) { return false; }
+    if (vfs == NULL) { free(p); return false; }
 
-    if (vfs->type == VFSTYPE_RAMFS) { return false; }
+    if (strlen(path) == 3 && path[0] == letter && path[1] == ':' && path[2] == '/') { free(p); return true; }
 
-    if (vfs->type == VFSTYPE_DISKFS) 
+    if (vfs->type == VFSTYPE_RAMFS)
     {
+        free(p);
         return false;
     }
+
+    if (vfs->type == VFSTYPE_DISKFS)
+    {
+        free(p);
+        return false;
+    }
+    free(p);
     return false;
 }
 
@@ -142,6 +159,45 @@ file_t vfs_file_open(char* fname)
     }
 
     return NULL_FILE;
+}
+
+char** vfs_get_files(char* path, int* count)
+{
+    if (path == NULL) { return NULL; }
+    if (!vfs_dir_exists(path)) { return NULL; }
+
+    char letter = vfs_convert_path(path);
+    if (letter == 0) { return NULL; }
+
+    vfs_t* vfs = vfs_from_letter(letter);
+    if (vfs == NULL) { return NULL; }
+
+    if (vfs->type == VFSTYPE_RAMFS)
+    {
+        int c = 0, i = 0, pos = 0;
+
+        ramfs_t* ramfs = vfs->fshost;
+        for (i = 0; i < ramfs->info->count_max; i++) { if (ramfs->info->files[i].size == 0) { continue; } c++; }
+
+        char** files = tmalloc(c * sizeof(char*), MEMTYPE_PTRARRAY);
+
+        for (i = 0; i < ramfs->info->count_max; i++)
+        {
+            if (ramfs->info->files[i].size == 0) { continue; }
+            char* fname = tmalloc(strlen(ramfs->info->files[i].name) + 1, MEMTYPE_STRING);
+            strcpy(fname, ramfs->info->files[i].name);
+            files[pos] = fname;
+            pos++;
+        }
+
+        *count = c;
+        return files;
+    }
+}
+
+char** vfs_get_dirs(char* path, int* count)
+{
+    
 }
 
 int vfs_free_index()

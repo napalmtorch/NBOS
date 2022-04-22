@@ -16,6 +16,8 @@ void cmdhandler_init()
     cmdhandler_register((command_t){ .name = "CLS",  .usage = "cls [fg] [bg]", .help = "Clear the screen", .execute = cmd_clear });
     cmdhandler_register((command_t){ .name = "HELP", .usage = "help [-u : usage]", .help = "Show list of commands", .execute = cmd_help });
     cmdhandler_register((command_t){ .name = "EXEC", .usage = "exec [fname] [args]", .help = "Execute a gsharp file", .execute = cmd_exec });
+    cmdhandler_register((command_t){ .name = "CD", .usage = "cd [path]", .help = "Set the current directory", .execute = cmd_cd });
+    cmdhandler_register((command_t){ .name = "DIR", .usage = "dir [path]", .help = "List contents of directory", .execute = cmd_dir });
 
     debug_ok("Initialized command handler");
 }
@@ -121,10 +123,14 @@ int cmd_help(int argc, char** argv)
 int cmd_exec(int argc, char** argv)
 {
     terminal_t* t = argv[1];
-    char* fname = tmalloc(32768, MEMTYPE_STRING);
-    for (int i = 3; i < argc; i++) { strcat(fname, argv[i]); }
-    debug_info("FNAME: '%s'", fname);
     
+    if (argc == 3 || strlen(argv[3]) == 0) { term_printcaret(t); return 0; }
+
+    char* p = tmalloc(strlen(argv[3]) + 1, MEMTYPE_STRING);
+    strcpy(p, argv[3]);
+
+    char* fname = term_getfullpath(t, p);
+
     DEBUG old = debug_getmode();
     debug_setmode(DEBUG_TERMINAL);
     debug_setterm(t);
@@ -132,6 +138,63 @@ int cmd_exec(int argc, char** argv)
     if (tokenizer.toks == NULL) { term_println_fg(t, "Tokenizer failed", COL32_TOMATO); }
     else { term_println_fg(t, "Program finished", COL32_LIME); }
     debug_setmode(old);
+
+    free(p);
+    free(fname);
     term_printcaret(t);
     return 0;
+}
+
+int cmd_dir(int argc, char** argv)
+{
+    terminal_t* t = argv[1];
+    char* path = argv[3];
+
+    // no path specified
+    if (argc == 3 || strlen(path) == 0) 
+    { 
+        char* p = tmalloc(strlen(t->path) + 1, MEMTYPE_STRING);
+        strcpy(p, t->path);
+
+        int file_count = 0;
+        char** files   = vfs_get_files(p, &file_count);
+
+        for (int i = 0; i < file_count; i++) { term_println(t, files[i]); free(files[i]); }
+
+        free(p);
+        term_printcaret(t); 
+        return 0; 
+    }
+
+    char* p = term_getfullpath(t, path);
+    if (!vfs_dir_exists(p)) { term_printf(t, "Invalid directory '%s'\n", p); free(p); term_printcaret(t); return NULL; }
+
+    int file_count = 0;
+    char** files   = vfs_get_files(p, &file_count);
+
+    for (int i = 0; i < file_count; i++) { term_println(t, files[i]); free(files[i]); }
+
+    term_printcaret(t); 
+    return 0; 
+}
+
+int cmd_cd(int argc, char** argv)
+{
+    terminal_t* t = argv[1];
+    char* path = argv[3];
+
+    if (argc == 3 || strlen(path) == 0) { term_printcaret(t); return 0; }
+
+    char* p = term_getfullpath(t, path);
+    if (!vfs_dir_exists(p)) { term_printf(t, "Invalid directory '%s'\n", p); free(p); term_printcaret(t); return NULL; }
+
+    free(t->path);
+    t->path = p;
+    term_printcaret(t);
+    return 0;
+}
+
+int cmd_view(int argc, char** argv)
+{
+    
 }

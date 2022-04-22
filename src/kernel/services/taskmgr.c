@@ -1,6 +1,8 @@
 #include <kernel/services/taskmgr.h>
 #include <kernel/core/kernel.h>
 
+void taskmgr_btn_threadterm(gui_button_t* button);
+
 taskmgr_t* taskmgr_create(int x, int y)
 {
     taskmgr_t* taskmgr = gui_create_window(x, y, 384, 480, "Task Manager");
@@ -30,7 +32,7 @@ taskmgr_t* taskmgr_create(int x, int y)
     taskmgr->list_windows = gui_create_listbox(8, 8, taskmgr->tab_windows->base.base.bounds.width - 16, taskmgr->tab_windows->base.base.bounds.height - 16, taskmgr->tab_windows);
     gui_container_add_widget(taskmgr->tab_windows, taskmgr->list_windows);
 
-    taskmgr->list_threads = gui_create_listbox(8, 8, taskmgr->tab_threads->base.base.bounds.width - 16, taskmgr->tab_threads->base.base.bounds.height - 16, taskmgr->tab_threads);
+    taskmgr->list_threads = gui_create_listbox(8, 28, taskmgr->tab_threads->base.base.bounds.width - 16, taskmgr->tab_threads->base.base.bounds.height - 72, taskmgr->tab_threads);
     gui_container_add_widget(taskmgr->tab_threads, taskmgr->list_threads);
 
     taskmgr->label_memused = gui_create_label(8, 8, "Heap Used: ", taskmgr->tab_stats);
@@ -41,6 +43,15 @@ taskmgr_t* taskmgr_create(int x, int y)
 
     taskmgr->label_cpuusage = gui_create_label(8, 92, "CPU Usage:  0%", taskmgr->tab_stats);
     gui_container_add_widget(taskmgr->tab_stats, taskmgr->label_cpuusage);
+
+    taskmgr->label_threadrows = gui_create_label(8, 4, "NAME            MEM USAGE    CPU USAGE", taskmgr->tab_threads);
+    gui_container_add_widget(taskmgr->tab_threads, taskmgr->label_threadrows);
+
+    taskmgr->btn_thread_term = gui_create_button(taskmgr->list_threads->base.bounds.x + taskmgr->list_threads->base.bounds.width - 92, 
+                                                 taskmgr->list_threads->base.bounds.y + taskmgr->list_threads->base.bounds.height + 8, 92, 22, "Terminate", taskmgr->tab_threads);
+    taskmgr->btn_thread_term->base.on_ms_click = taskmgr_btn_threadterm;
+    gui_container_add_widget(taskmgr->tab_threads, taskmgr->btn_thread_term);
+    free(taskmgr->btn_thread_term->base.tag);
 
     taskmgr->tabctrl->selected_tab   = taskmgr->tab_threads;
     taskmgr->tabctrl->selected_index = 1;
@@ -69,16 +80,24 @@ void taskmgr_update(taskmgr_t* taskmgr)
         taskmgr->list_threads->items      = NULL;
         taskmgr->list_threads->item_count = 0;
 
+        taskmgr->btn_thread_term->base.tag = taskmgr->list_threads;
+
         for (uint32_t i = 0; i < THREADMGR.count; i++)
         {
             char txt[160];
             memset(txt, 0, 160);
             strcat(txt, THREADMGR.threads[i]->name);
-            while (strlen(txt) < 24) { stradd(txt, ' '); }
+            while (strlen(txt) < 16) { stradd(txt, ' '); }
             char temp[32];
             memset(temp, 0, 32);
             strcat(txt, ltoa((heap_calc_used(&HEAP_LARGE, THREADMGR.threads[i]) + heap_calc_used(&HEAP_SMALL, THREADMGR.threads[i])) / 1024, temp, 10));
             strcat(txt, " KB");
+
+            memset(temp, 0, 32);
+            while (strlen(txt) < 29) { stradd(txt, ' '); }
+            strcat(txt, ltoa(THREADMGR.threads[i]->cpu_usage, temp, 10));
+            stradd(txt, '%');
+
             listbox_add(taskmgr->list_threads, txt);
         }        
     }
@@ -136,16 +155,44 @@ uint32_t taskmgr_calc_usage()
     uint32_t total_ticks = 0, idle_ticks;
     for (int i = 0; i < THREADMGR.count; i++)
     {
-        if (!strcmp(THREADMGR.threads[i]->name, "idle")) { idle_ticks = THREADMGR.threads[i]->tps; }
-        total_ticks += THREADMGR.threads[i]->tps;
+        if (!strcmp(THREADMGR.threads[i]->name, "kernel")) { idle_ticks = THREADMGR.threads[i]->ptps; }
+        total_ticks += THREADMGR.threads[i]->ptps;
     }
-    if (idle_ticks >= 100) { idle_ticks /= 100; total_ticks /= 100; }
-    else if (idle_ticks >= 1000) { idle_ticks /= 1000; total_ticks /= 1000; }
 
-    uint32_t tmi = total_ticks - idle_ticks;
-
-    double usage = (double)tmi / (double)total_ticks;
-    usage *= 100.0;
-
+    uint32_t usage = 0;
+    for (int i = 0; i < THREADMGR.count; i++)
+    {
+        double num = (double)THREADMGR.threads[i]->ptps / (double)total_ticks;
+        THREADMGR.threads[i]->cpu_usage = (uint32_t)((double)num * 100.0);
+        if (strcmp(THREADMGR.threads[i]->name, "kernel")) { usage += THREADMGR.threads[i]->cpu_usage; }
+    }
     return usage;
+}
+
+void taskmgr_btn_threadterm(gui_button_t* button)
+{
+    gui_event_ms_click(button);
+    gui_listbox_t* threads = button->base.tag;
+    if (threads == NULL) { return; }
+    if (threads->selected_index < 0 || threads->selected_index >+ threads->item_count) { return; }
+
+    char* sel = threads->items[threads->selected_index];
+    char tname[64];
+    memset(tname, 0, 64);
+
+    int i = 0;
+    for (int i = 0; i < strlen(sel); i++)
+    {
+        if (sel[i] == ' ') { break; }
+        else { stradd(tname, sel[i]); }
+    }
+
+    for (i = 0; i < THREADMGR.count; i++)
+    {
+        if (!strcmp(tname, THREADMGR.threads[i]->name))
+        {
+            threadmgr_terminate(THREADMGR.threads[i]);
+            return;
+        }
+    }
 }

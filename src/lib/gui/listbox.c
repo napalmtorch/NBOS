@@ -38,7 +38,7 @@ void gui_update_listbox(gui_listbox_t* listbox)
     rect_t itembounds = (rect_t) { .x = bounds.x + sx + 2, .y = bounds.y + sy + 2, .width = bounds.width - 3, .height = font_geth(listbox->base.theme.font) };
     for (uint32_t i = 0; i < listbox->item_count; i++)
     {
-        if (rect_contains(itembounds, mouse_getx(), mouse_gety()) && mouse_btn_left()) { listbox->selected_index = i; }
+        if (rect_contains(itembounds, mouse_getx(), mouse_gety()) && mouse_btn_left() && !listbox->scrollbar->base.flags.hover) { listbox->selected_index = i; }
         itembounds.y += font_geth(listbox->base.theme.font);
     }
 
@@ -48,7 +48,7 @@ void gui_update_listbox(gui_listbox_t* listbox)
         int o2 = (listbox->base.theme.border_style == BORDERSTYLE_3D ? 1 : listbox->base.theme.border_size);
         listbox->scrollbar->base.bounds.x      = listbox->base.bounds.x + (listbox->base.bounds.width - listbox->scrollbar->base.bounds.width - o2);
         listbox->scrollbar->base.bounds.y      = listbox->base.bounds.y + o1;
-        listbox->scrollbar->base.bounds.height = listbox->base.bounds.height;
+        listbox->scrollbar->base.bounds.height = listbox->base.bounds.height - (o1 + o2);
         listbox->scrollbar->base.update(listbox->scrollbar); 
     }
 }

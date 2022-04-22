@@ -20,9 +20,9 @@ void threadmgr_init()
     THREAD_NEXT       = NULL;
 
     thread_t* kthread = thread_create_kernel();
-    thread_t* ithread = thread_create("idle", TSTACK_SMALL, idle_main, 0, NULL);
+    //thread_t* ithread = thread_create("idle", TSTACK_DEFAULT, idle_main, 0, NULL);
     threadmgr_load(kthread);
-    threadmgr_load(ithread);
+    //threadmgr_load(ithread);
     THREAD = kthread;
 
     for (uint32_t i = 0; i < HEAP_LARGE.max; i++)
@@ -42,17 +42,18 @@ void yieldf() { unlock(); yield(); }
 
 void yield()
 {
-    //debug_info("THREAD SWITCH");
     if (!THREADMGR.ready) { asm volatile("sti"); return; }
     if (THREADMGR.threads == NULL) { asm volatile("sti"); return; }
+    THREADMGR.ready = false;
 
     asm volatile("cli");
     THREAD = THREADMGR.threads[THREADMGR.index];
-    if (THREAD == NULL) { asm volatile("sti"); return; }
+    if (THREAD == NULL) { asm volatile("sti"); THREADMGR.ready = true; return; }
     if (THREAD->state == TSTATE_TERMINATED) { THREAD->locked = false; }
-    if (THREAD->locked) { asm volatile("sti"); return; }
+    if (THREAD->locked) { asm volatile("sti"); THREADMGR.ready = true; return; }
 
     THREAD_NEXT = threadmgr_next();
+    THREADMGR.ready = true;
     thread_switch();
 }
 
@@ -266,7 +267,7 @@ void thread_exit()
     register int eax asm("eax");
     uint32_t code = eax;
     THREAD->state = TSTATE_TERMINATED;
-    //debug_info("Thread %d('%s') exited with code %d", THREAD->id, THREAD->name, code);
+    debug_info("Thread %d('%s') exited with code %d", THREAD->id, THREAD->name, code);
     _sti();
     while (true) { yield(); }
 }

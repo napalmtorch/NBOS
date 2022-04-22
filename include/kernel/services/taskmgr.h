@@ -17,9 +17,12 @@ typedef struct
     gui_label_t*   label_memused;
     gui_label_t*   label_memtotal;
     gui_label_t*   label_cpuusage;
+    gui_label_t*   label_threadrows;
 
     gui_listbox_t* list_windows;
     gui_listbox_t* list_threads;
+
+    gui_button_t* btn_thread_term;
 
 } PACKED taskmgr_t;
 

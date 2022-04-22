@@ -21,6 +21,9 @@ terminal_t* term_create(int x, int y)
     term->kb.stream = stream_create(4096);
     term->kb.host   = term;
 
+    term->path = tmalloc(32, MEMTYPE_STRING);
+    strcat(term->path, "A:/");
+
     term->width                     = (w - (term->window.base.base.theme.border_style == BORDERSTYLE_3D ? 3 : 2)) / font_getw(&FONT_SANS8x14);
     term->height                    = (h - (term->window.base.base.theme.border_style == BORDERSTYLE_3D ? 3 : 2) - 19) / font_geth(&FONT_SANS8x14);
     term->old_w                     = w;
@@ -69,16 +72,15 @@ void term_render(terminal_t* term)
 {
     gui_render_window(term);
 
-    term->time = pit_get_millis();
-    if (term->time != term->timelast) { term->timelast = term->time; term->curtime++; }
+    term->time = pit_get_seconds();
+    if (term->time != term->timelast) { term->timelast = term->time; term->curtime = !term->curtime; }
 
-    if (term->curtime < 500)
+    if (!term->curtime)
     {
         int bordl = (term->window.base.base.theme.border_style == BORDERSTYLE_3D ? 1 : 0);
-        image_rectf(&term->window.base.buffer, bordl + (term->cx * font_getw(&FONT_SANS8x14)), bordl + 19 + (term->cy * font_geth(&FONT_SANS8x14)), font_getw(&FONT_SANS8x14), font_geth(&FONT_SANS8x14), term->fg);
+        image_t buff = video_getinfo().buffer;
+        image_rectf(&buff, term->window.base.base.bounds.x + bordl + (term->cx * font_getw(&FONT_SANS8x14)), term->window.base.base.bounds.y + bordl + 19 + (term->cy * font_geth(&FONT_SANS8x14)), font_getw(&FONT_SANS8x14), font_geth(&FONT_SANS8x14), term->fg);
     }
-    if (term->curtime >= 500 && term->curtime < 505) { term_draw(term); }
-    if (term->curtime >= 1000) { term->curtime = 0; }
 }
 
 void term_clear(terminal_t* term)
@@ -130,17 +132,38 @@ void term_scroll(terminal_t* term)
     uint32_t line = (term->buffer.width * font_geth(&FONT_SANS8x14)) * 4;
     uint32_t size = term->buffer.width * term->buffer.height * 4;
     memcpy(term->buffer.data, (void*)((uint32_t)term->buffer.data + line), size - line);
-    for (int i = 0; i < term->width; i++) { term_putc(term, i, term->height - 1, 0x20, term->fg, term->bg); }
+    memset((void*)((uint32_t)term->buffer.data + (size - line)), term->bg, line);
     term->cx = 0;
     term->cy = term->height - 1;
     term_draw(term);
+}
+
+char* term_getfullpath(terminal_t* term, char* path)
+{
+    if (strlen(path) == 0) { return NULL; }
+
+    // starts with drive
+    if (isalpha(path[0]) && path[1] == ':' && path[2] == '/')
+    {
+        char* p = tmalloc(strlen(path) + 1, MEMTYPE_STRING);
+        strcpy(p, path);
+        return p;
+    }
+    // relative directory
+    else
+    {
+        char* p = tmalloc(strlen(path) + strlen(term->path) + 32, MEMTYPE_STRING);
+        strcpy(p, term->path);
+        strcat(p, path);
+        return p;
+    }
 }
 
 void term_printcaret(terminal_t* term)
 {
     term_print_fg(term, "root", COL32_CYAN);
     term_printc(term, '@');
-    term_print_fg(term, "A:/", COL32_YELLOW);
+    term_print_fg(term, term->path, COL32_YELLOW);
     term_print(term, "> ");
 }
 
@@ -194,6 +217,13 @@ void term_onchar(terminal_t* term, int c)
 void term_onenter(terminal_t* term, void* unused)
 {
     term_newline(term);
+    if (strlen(term->kb.stream.data) == 0)
+    {
+        term_printcaret(term);
+        memset(term->kb.stream.data, 0, term->kb.stream.size);
+        return;
+    }
+
     if (!cmdhandler_execute(term->kb.stream.data, term)) 
     { 
         term_println_fg(term, "Invalid command or file", COL32_TOMATO);

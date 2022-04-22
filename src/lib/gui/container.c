@@ -115,10 +115,31 @@ void gui_container_add_widget(gui_container_t* container, gui_widget_t* widget)
 
 void gui_container_remove_widget(gui_container_t* container, gui_widget_t* widget)
 {
-    
+    for (int i = 0; i < container->widget_count; i++)
+    {
+        if (container->widgets[i] == widget) { gui_container_remove_widget_at(container, i); return; }
+    }
 }
 
 void gui_container_remove_widget_at(gui_container_t* container, int index)
 {
+    if (container == NULL) { return; }
+    if (index < 0 || index >= container->widget_count) { return; }
 
+    if (container->widget_count == 1 && index == 0)
+    {
+        container->widgets[0]->dispose(container->widgets[0]);
+        free(container->widgets);
+        container->widget_count = 0;
+        container->widgets = NULL;
+        return;
+    }
+
+    gui_widget_t** widgets = tmalloc((container->widget_count - 1) * sizeof(gui_widget_t*), MEMTYPE_PTRARRAY);
+
+    int pos = 0;
+    for (int i = 0; i < container->widget_count; i++) { if (i != index) { widgets[pos] = container->widgets[i]; pos++; } }
+    
+    free(container->widgets);
+    container->widget_count--;
 }

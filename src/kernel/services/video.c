@@ -5,6 +5,8 @@ const char  _vidname[] = "shellhost";
 videoctrl_t _vidctrl;
 int         _vidtime, _vidtimelast, _vidframes;
 int         _drawtime, _drawtimelast, _drawtimer;
+int         _last_wincount;
+gui_window_t* _last_winactive;
 
 int video_main(int argc, char** argv);
 void video_draw();
@@ -18,9 +20,12 @@ void video_init(videomode_t mode)
     _vidctrl.buffer.data = NULL;
     vbe_init();
     _vidctrl.thread      = thread_create(_vidname, TSTACK_DEFAULT, video_main, 0, NULL);
-    _vidctrl.fps_limit   = 0;
+    _vidctrl.fps_limit   = 300;
     video_fetchmodes();
     video_setmode(mode.width, mode.height);
+
+    _last_wincount = 1000000;
+    _last_winactive = NULL;
 
     threadmgr_load(_vidctrl.thread);
     debug_ok("Initialized video driver");
@@ -61,6 +66,18 @@ int video_main(int argc, char** argv)
             video_update_strings();
 
             taskbar_update_time(_vidctrl.taskbar);
+        }
+
+        if (_last_wincount != winmgr_get_count())
+        {
+            _last_wincount = winmgr_get_count();
+            taskbar_winbtns_update(_vidctrl.taskbar);
+        }
+
+        if (_last_winactive != winmgr_get_active())
+        {
+            _last_winactive = winmgr_get_active();
+            taskbar_winbtns_update_active(_vidctrl.taskbar);
         }
 
         // draw timer increment
@@ -178,4 +195,62 @@ void taskbar_update_time(taskbar_t* taskbar)
     taskbar->label_time->base.bounds.x = taskbar->base.base.bounds.width - (tw + 12);
     taskbar->label_time->base.settext(taskbar->label_time, time);
     free(time);
+}
+
+void taskbar_winbtns_update(taskbar_t* taskbar)
+{
+    if (taskbar == NULL) { return; }
+
+    if (taskbar->winbtns != NULL)
+    {
+        for (int i = 0; i < taskbar->winbtns_count; i++) 
+        { 
+            gui_container_remove_widget_at(taskbar, i);
+            taskbar->winbtns[i]->base.dispose(taskbar->winbtns[i]); 
+        }
+        free(taskbar->winbtns);
+    }
+
+    taskbar->winbtns_count = winmgr_get_count();
+    taskbar->winbtns = tmalloc(taskbar->winbtns_count * sizeof(gui_button_t*), MEMTYPE_PTRARRAY);
+
+    int xx = 48, yy = 2;
+    for (int i = 0; i < taskbar->winbtns_count; i++)
+    {
+        taskbar->winbtns[i] = gui_create_button(xx, yy, 120, taskbar->base.base.bounds.height - 5, winmgr_get_list()[i]->base.base.text, taskbar);
+        taskbar->winbtns[i]->can_toggle = true;
+        taskbar->winbtns[i]->base.on_ms_click = taskbar_winbtn_down;
+        free(taskbar->base.base.tag);
+        taskbar->winbtns[i]->base.tag = winmgr_get_list()[i];
+        if (winmgr_get_list()[i] == winmgr_get_active()) { taskbar->winbtns[i]->base.flags.toggled = true; }
+        gui_container_add_widget(taskbar, taskbar->winbtns[i]);
+        xx += 122;
+    }
+    taskbar->base.base.draw(taskbar);
+}
+
+void taskbar_winbtns_update_active(taskbar_t* taskbar)
+{
+    if (winmgr_get_active() == NULL)
+    { for (int i = 0; i < taskbar->winbtns_count; i++) { taskbar->winbtns[i]->base.flags.toggled = false; } taskbar->base.base.draw(taskbar); return; }
+
+    for (int i = 0; i < taskbar->winbtns_count; i++)
+    {
+        if (winmgr_get_active() == taskbar->winbtns[i]->base.tag) { taskbar->winbtns[i]->base.flags.toggled = true; }
+        else { taskbar->winbtns[i]->base.flags.toggled = false; }
+    }
+    taskbar->base.base.draw(taskbar);
+}
+
+void taskbar_winbtn_down(gui_button_t* btn)
+{
+    gui_event_ms_click(btn);
+    for (int i = 0; i < winmgr_get_count(); i++)
+    {
+        if (btn->base.tag == winmgr_get_list()[i])
+        {
+            winmgr_set_active(winmgr_get_list()[i]);
+            return;
+        }
+    }
 }

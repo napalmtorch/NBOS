@@ -1,0 +1,33 @@
+Interpreter
+MessageBox
+Double Click Event
+Start Menu
+Config scripts
+Check for bugs
+
+
+File Explorer:
+- TileIconView(Files)
+- ListBox(Drives)
+- Button(Back, Up, Go, Search)
+- TextBox(Path, Search)
+- Container(Status bar)
+- Label(File count, Sel size)
+
+File Dialog:
+- Button(Back, Up)
+- ListBox(Drives, Files)
+- TextBox(Path)
+- Button(Go, Cancel)
+
+Text Editor
+- Button(New, Open, Save, Save As)
+- Multiline Textbox
+- Container(Status bar)
+- Label(Line, Offset)
+
+Settings
+- TabControl(Video, Input, Boot)
+- 
+
+

@@ -176,4 +176,6 @@ gui_window_t* winmgr_set_active(gui_window_t* window)
 
 gui_window_t** winmgr_get_list() { return _win_list; }
 
+gui_window_t* winmgr_get_active() { return _win_active; }
+
 uint32_t winmgr_get_count() { return _win_count; }

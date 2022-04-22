@@ -59,7 +59,7 @@ bool tokenizer_run(gs_tokenizer_t* tokenizer)
         tokenizer->word = NULL;
         debug_error("Tokenizer failed"); 
     }
-    else { debug_ok("Tokenizer finished"); }
+    else { debug_ok("Tokenizer finished - %d tokens created", tokenizer->tok_count); }
 
     yield();
     return !error;
@@ -204,7 +204,7 @@ void tokenizer_addtok(gs_tokenizer_t* tokenizer, gs_token_t tok)
     tokenizer->toks = toks;
     tokenizer->toks[tokenizer->tok_count] = tok;
     tokenizer->tok_count++;
-    debug_info("Added token - LINE: %d TYPE: 0x%2x VAL: '%s'", tok.line, tok.type, tok.value);
+    //debug_info("Added token - LINE: %d TYPE: 0x%2x VAL: '%s'", tok.line, tok.type, tok.value);
 }
 
 bool gs_is_keyword(char* value)

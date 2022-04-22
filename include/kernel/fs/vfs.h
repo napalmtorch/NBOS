@@ -38,3 +38,6 @@ bool vfs_file_exists(char* fname);
 bool vfs_dir_exists(char* path);
 
 file_t vfs_file_open(char* fname);
+
+char** vfs_get_files(char* path, int* count);
+char** vfs_get_dirs(char* path, int* count);

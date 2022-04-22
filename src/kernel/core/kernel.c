@@ -47,9 +47,7 @@ void kernel_main()
 {
     lock(); debug_ok("Entered kernel main"); unlock();
 
-    cmdhandler_execute("cls", NULL);
-
-    while (true)
+    while (true) 
     {
         lock();
         thread_monitor(threadmgr_get_byindex(0));
@@ -62,7 +60,14 @@ void kernel_main()
 int idle_main(int argc, char** argv)
 {
     lock(); debug_ok("Entered idle main"); unlock();
-    while (true) { lock(); thread_monitor(argv[0]); yieldf(); }
+    while (true) 
+    {
+        lock();
+        thread_monitor(threadmgr_get_byindex(0));
+        heap_clean(&HEAP_SMALL);
+        heap_clean(&HEAP_LARGE);
+        yieldf();
+    }
 }
 
 void kernel_parse_args()
